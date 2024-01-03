@@ -1,0 +1,2612 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statement_list
+Rule 2     statement_list -> statement
+Rule 3     statement_list -> statement_list statement
+Rule 4     statement_list -> statement_list NEWLINE
+Rule 5     statement -> assignment
+Rule 6     statement -> if_statement
+Rule 7     statement -> while_statement
+Rule 8     statement -> return_statement
+Rule 9     statement -> function
+Rule 10    statement -> function_call
+Rule 11    statement -> statement NEWLINE
+Rule 12    block -> INDENT statement_list DEDENT
+Rule 13    block -> block NEWLINE
+Rule 14    assignment -> ID ASSIGN expression
+Rule 15    assignment -> ID COLON type ASSIGN expression
+Rule 16    if_statement -> IF logical COLON block
+Rule 17    if_statement -> IF logical COLON block NEWLINE ELSE COLON block
+Rule 18    while_statement -> WHILE logical COLON block
+Rule 19    while_statement -> WHILE TRUE COLON block
+Rule 20    return_statement -> RETURN expression
+Rule 21    id -> ID
+Rule 22    boolean -> TRUE
+Rule 23    boolean -> FALSE
+Rule 24    integer -> INTEGER_VALUE
+Rule 25    float -> FLOAT_VALUE
+Rule 26    string -> STRING_VALUE
+Rule 27    value -> integer
+Rule 28    value -> float
+Rule 29    value -> boolean
+Rule 30    value -> string
+Rule 31    variable -> id
+Rule 32    variable -> function_call
+Rule 33    factor -> value
+Rule 34    factor -> variable
+Rule 35    unary -> NOT
+Rule 36    logical -> factor LT factor
+Rule 37    logical -> factor LE factor
+Rule 38    logical -> factor GT factor
+Rule 39    logical -> factor GE factor
+Rule 40    logical -> factor EQUALS factor
+Rule 41    logical -> factor NEQUALS factor
+Rule 42    logical -> factor AND factor
+Rule 43    logical -> factor OR factor
+Rule 44    math -> factor PLUS factor
+Rule 45    math -> factor MINUS factor
+Rule 46    math -> factor TIMES factor
+Rule 47    math -> factor DIVIDE factor
+Rule 48    binary -> logical
+Rule 49    binary -> math
+Rule 50    expression -> factor
+Rule 51    expression -> unary
+Rule 52    expression -> binary
+Rule 53    type -> INT
+Rule 54    type -> FLOAT
+Rule 55    type -> STR
+Rule 56    type -> BOOL
+Rule 57    type -> VOID
+Rule 58    argument_list_definition -> ID COLON type
+Rule 59    argument_list_definition -> ID COLON type COMMA argument_list_definition
+Rule 60    function -> DEF ID LPAREN argument_list_definition RPAREN RETURN_TYPE type COLON block
+Rule 61    function_call -> ID LPAREN RPAREN
+Rule 62    function_call -> ID LPAREN argument_list_call RPAREN
+Rule 63    argument_list_call -> expression
+Rule 64    argument_list_call -> expression COMMA argument_list_call
+
+Terminals, with rules where they appear
+
+AND                  : 42
+ASSIGN               : 14 15
+BOOL                 : 56
+COLON                : 15 16 17 17 18 19 58 59 60
+COMMA                : 59 64
+DEDENT               : 12
+DEF                  : 60
+DIVIDE               : 47
+ELSE                 : 17
+EQUALS               : 40
+FALSE                : 23
+FLOAT                : 54
+FLOAT_VALUE          : 25
+GE                   : 39
+GT                   : 38
+ID                   : 14 15 21 58 59 60 61 62
+IF                   : 16 17
+INDENT               : 12
+INT                  : 53
+INTEGER_VALUE        : 24
+LE                   : 37
+LPAREN               : 60 61 62
+LT                   : 36
+MINUS                : 45
+NEQUALS              : 41
+NEWLINE              : 4 11 13 17
+NOT                  : 35
+OR                   : 43
+PLUS                 : 44
+RETURN               : 20
+RETURN_TYPE          : 60
+RPAREN               : 60 61 62
+STR                  : 55
+STRING_VALUE         : 26
+TIMES                : 46
+TRUE                 : 19 22
+VOID                 : 57
+WHILE                : 18 19
+error                : 
+
+Nonterminals, with rules where they appear
+
+argument_list_call   : 62 64
+argument_list_definition : 59 60
+assignment           : 5
+binary               : 52
+block                : 13 16 17 17 18 19 60
+boolean              : 29
+expression           : 14 15 20 63 64
+factor               : 36 36 37 37 38 38 39 39 40 40 41 41 42 42 43 43 44 44 45 45 46 46 47 47 50
+float                : 28
+function             : 9
+function_call        : 10 32
+id                   : 31
+if_statement         : 6
+integer              : 27
+logical              : 16 17 18 48
+math                 : 49
+program              : 0
+return_statement     : 8
+statement            : 2 3 11
+statement_list       : 1 3 4 12
+string               : 30
+type                 : 15 58 59 60
+unary                : 51
+value                : 33
+variable             : 34
+while_statement      : 7
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statement_list
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement_list statement
+    (4) statement_list -> . statement_list NEWLINE
+    (5) statement -> . assignment
+    (6) statement -> . if_statement
+    (7) statement -> . while_statement
+    (8) statement -> . return_statement
+    (9) statement -> . function
+    (10) statement -> . function_call
+    (11) statement -> . statement NEWLINE
+    (14) assignment -> . ID ASSIGN expression
+    (15) assignment -> . ID COLON type ASSIGN expression
+    (16) if_statement -> . IF logical COLON block
+    (17) if_statement -> . IF logical COLON block NEWLINE ELSE COLON block
+    (18) while_statement -> . WHILE logical COLON block
+    (19) while_statement -> . WHILE TRUE COLON block
+    (20) return_statement -> . RETURN expression
+    (60) function -> . DEF ID LPAREN argument_list_definition RPAREN RETURN_TYPE type COLON block
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    ID              shift and go to state 10
+    IF              shift and go to state 11
+    WHILE           shift and go to state 12
+    RETURN          shift and go to state 13
+    DEF             shift and go to state 14
+
+    program                        shift and go to state 1
+    statement_list                 shift and go to state 2
+    statement                      shift and go to state 3
+    assignment                     shift and go to state 4
+    if_statement                   shift and go to state 5
+    while_statement                shift and go to state 6
+    return_statement               shift and go to state 7
+    function                       shift and go to state 8
+    function_call                  shift and go to state 9
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> statement_list .
+    (3) statement_list -> statement_list . statement
+    (4) statement_list -> statement_list . NEWLINE
+    (5) statement -> . assignment
+    (6) statement -> . if_statement
+    (7) statement -> . while_statement
+    (8) statement -> . return_statement
+    (9) statement -> . function
+    (10) statement -> . function_call
+    (11) statement -> . statement NEWLINE
+    (14) assignment -> . ID ASSIGN expression
+    (15) assignment -> . ID COLON type ASSIGN expression
+    (16) if_statement -> . IF logical COLON block
+    (17) if_statement -> . IF logical COLON block NEWLINE ELSE COLON block
+    (18) while_statement -> . WHILE logical COLON block
+    (19) while_statement -> . WHILE TRUE COLON block
+    (20) return_statement -> . RETURN expression
+    (60) function -> . DEF ID LPAREN argument_list_definition RPAREN RETURN_TYPE type COLON block
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    $end            reduce using rule 1 (program -> statement_list .)
+    NEWLINE         shift and go to state 16
+    ID              shift and go to state 10
+    IF              shift and go to state 11
+    WHILE           shift and go to state 12
+    RETURN          shift and go to state 13
+    DEF             shift and go to state 14
+
+    statement                      shift and go to state 15
+    assignment                     shift and go to state 4
+    if_statement                   shift and go to state 5
+    while_statement                shift and go to state 6
+    return_statement               shift and go to state 7
+    function                       shift and go to state 8
+    function_call                  shift and go to state 9
+
+state 3
+
+    (2) statement_list -> statement .
+    (11) statement -> statement . NEWLINE
+
+  ! shift/reduce conflict for NEWLINE resolved as shift
+    ID              reduce using rule 2 (statement_list -> statement .)
+    IF              reduce using rule 2 (statement_list -> statement .)
+    WHILE           reduce using rule 2 (statement_list -> statement .)
+    RETURN          reduce using rule 2 (statement_list -> statement .)
+    DEF             reduce using rule 2 (statement_list -> statement .)
+    $end            reduce using rule 2 (statement_list -> statement .)
+    DEDENT          reduce using rule 2 (statement_list -> statement .)
+    NEWLINE         shift and go to state 17
+
+  ! NEWLINE         [ reduce using rule 2 (statement_list -> statement .) ]
+
+
+state 4
+
+    (5) statement -> assignment .
+
+    NEWLINE         reduce using rule 5 (statement -> assignment .)
+    ID              reduce using rule 5 (statement -> assignment .)
+    IF              reduce using rule 5 (statement -> assignment .)
+    WHILE           reduce using rule 5 (statement -> assignment .)
+    RETURN          reduce using rule 5 (statement -> assignment .)
+    DEF             reduce using rule 5 (statement -> assignment .)
+    $end            reduce using rule 5 (statement -> assignment .)
+    DEDENT          reduce using rule 5 (statement -> assignment .)
+
+
+state 5
+
+    (6) statement -> if_statement .
+
+    NEWLINE         reduce using rule 6 (statement -> if_statement .)
+    ID              reduce using rule 6 (statement -> if_statement .)
+    IF              reduce using rule 6 (statement -> if_statement .)
+    WHILE           reduce using rule 6 (statement -> if_statement .)
+    RETURN          reduce using rule 6 (statement -> if_statement .)
+    DEF             reduce using rule 6 (statement -> if_statement .)
+    $end            reduce using rule 6 (statement -> if_statement .)
+    DEDENT          reduce using rule 6 (statement -> if_statement .)
+
+
+state 6
+
+    (7) statement -> while_statement .
+
+    NEWLINE         reduce using rule 7 (statement -> while_statement .)
+    ID              reduce using rule 7 (statement -> while_statement .)
+    IF              reduce using rule 7 (statement -> while_statement .)
+    WHILE           reduce using rule 7 (statement -> while_statement .)
+    RETURN          reduce using rule 7 (statement -> while_statement .)
+    DEF             reduce using rule 7 (statement -> while_statement .)
+    $end            reduce using rule 7 (statement -> while_statement .)
+    DEDENT          reduce using rule 7 (statement -> while_statement .)
+
+
+state 7
+
+    (8) statement -> return_statement .
+
+    NEWLINE         reduce using rule 8 (statement -> return_statement .)
+    ID              reduce using rule 8 (statement -> return_statement .)
+    IF              reduce using rule 8 (statement -> return_statement .)
+    WHILE           reduce using rule 8 (statement -> return_statement .)
+    RETURN          reduce using rule 8 (statement -> return_statement .)
+    DEF             reduce using rule 8 (statement -> return_statement .)
+    $end            reduce using rule 8 (statement -> return_statement .)
+    DEDENT          reduce using rule 8 (statement -> return_statement .)
+
+
+state 8
+
+    (9) statement -> function .
+
+    NEWLINE         reduce using rule 9 (statement -> function .)
+    ID              reduce using rule 9 (statement -> function .)
+    IF              reduce using rule 9 (statement -> function .)
+    WHILE           reduce using rule 9 (statement -> function .)
+    RETURN          reduce using rule 9 (statement -> function .)
+    DEF             reduce using rule 9 (statement -> function .)
+    $end            reduce using rule 9 (statement -> function .)
+    DEDENT          reduce using rule 9 (statement -> function .)
+
+
+state 9
+
+    (10) statement -> function_call .
+
+    NEWLINE         reduce using rule 10 (statement -> function_call .)
+    ID              reduce using rule 10 (statement -> function_call .)
+    IF              reduce using rule 10 (statement -> function_call .)
+    WHILE           reduce using rule 10 (statement -> function_call .)
+    RETURN          reduce using rule 10 (statement -> function_call .)
+    DEF             reduce using rule 10 (statement -> function_call .)
+    $end            reduce using rule 10 (statement -> function_call .)
+    DEDENT          reduce using rule 10 (statement -> function_call .)
+
+
+state 10
+
+    (14) assignment -> ID . ASSIGN expression
+    (15) assignment -> ID . COLON type ASSIGN expression
+    (61) function_call -> ID . LPAREN RPAREN
+    (62) function_call -> ID . LPAREN argument_list_call RPAREN
+
+    ASSIGN          shift and go to state 18
+    COLON           shift and go to state 19
+    LPAREN          shift and go to state 20
+
+
+state 11
+
+    (16) if_statement -> IF . logical COLON block
+    (17) if_statement -> IF . logical COLON block NEWLINE ELSE COLON block
+    (36) logical -> . factor LT factor
+    (37) logical -> . factor LE factor
+    (38) logical -> . factor GT factor
+    (39) logical -> . factor GE factor
+    (40) logical -> . factor EQUALS factor
+    (41) logical -> . factor NEQUALS factor
+    (42) logical -> . factor AND factor
+    (43) logical -> . factor OR factor
+    (33) factor -> . value
+    (34) factor -> . variable
+    (27) value -> . integer
+    (28) value -> . float
+    (29) value -> . boolean
+    (30) value -> . string
+    (31) variable -> . id
+    (32) variable -> . function_call
+    (24) integer -> . INTEGER_VALUE
+    (25) float -> . FLOAT_VALUE
+    (22) boolean -> . TRUE
+    (23) boolean -> . FALSE
+    (26) string -> . STRING_VALUE
+    (21) id -> . ID
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    INTEGER_VALUE   shift and go to state 31
+    FLOAT_VALUE     shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    STRING_VALUE    shift and go to state 35
+    ID              shift and go to state 36
+
+    logical                        shift and go to state 21
+    factor                         shift and go to state 22
+    value                          shift and go to state 23
+    variable                       shift and go to state 24
+    integer                        shift and go to state 25
+    float                          shift and go to state 26
+    boolean                        shift and go to state 27
+    string                         shift and go to state 28
+    id                             shift and go to state 29
+    function_call                  shift and go to state 30
+
+state 12
+
+    (18) while_statement -> WHILE . logical COLON block
+    (19) while_statement -> WHILE . TRUE COLON block
+    (36) logical -> . factor LT factor
+    (37) logical -> . factor LE factor
+    (38) logical -> . factor GT factor
+    (39) logical -> . factor GE factor
+    (40) logical -> . factor EQUALS factor
+    (41) logical -> . factor NEQUALS factor
+    (42) logical -> . factor AND factor
+    (43) logical -> . factor OR factor
+    (33) factor -> . value
+    (34) factor -> . variable
+    (27) value -> . integer
+    (28) value -> . float
+    (29) value -> . boolean
+    (30) value -> . string
+    (31) variable -> . id
+    (32) variable -> . function_call
+    (24) integer -> . INTEGER_VALUE
+    (25) float -> . FLOAT_VALUE
+    (22) boolean -> . TRUE
+    (23) boolean -> . FALSE
+    (26) string -> . STRING_VALUE
+    (21) id -> . ID
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    TRUE            shift and go to state 38
+    INTEGER_VALUE   shift and go to state 31
+    FLOAT_VALUE     shift and go to state 32
+    FALSE           shift and go to state 34
+    STRING_VALUE    shift and go to state 35
+    ID              shift and go to state 36
+
+    logical                        shift and go to state 37
+    factor                         shift and go to state 22
+    value                          shift and go to state 23
+    variable                       shift and go to state 24
+    integer                        shift and go to state 25
+    float                          shift and go to state 26
+    boolean                        shift and go to state 27
+    string                         shift and go to state 28
+    id                             shift and go to state 29
+    function_call                  shift and go to state 30
+
+state 13
+
+    (20) return_statement -> RETURN . expression
+    (50) expression -> . factor
+    (51) expression -> . unary
+    (52) expression -> . binary
+    (33) factor -> . value
+    (34) factor -> . variable
+    (35) unary -> . NOT
+    (48) binary -> . logical
+    (49) binary -> . math
+    (27) value -> . integer
+    (28) value -> . float
+    (29) value -> . boolean
+    (30) value -> . string
+    (31) variable -> . id
+    (32) variable -> . function_call
+    (36) logical -> . factor LT factor
+    (37) logical -> . factor LE factor
+    (38) logical -> . factor GT factor
+    (39) logical -> . factor GE factor
+    (40) logical -> . factor EQUALS factor
+    (41) logical -> . factor NEQUALS factor
+    (42) logical -> . factor AND factor
+    (43) logical -> . factor OR factor
+    (44) math -> . factor PLUS factor
+    (45) math -> . factor MINUS factor
+    (46) math -> . factor TIMES factor
+    (47) math -> . factor DIVIDE factor
+    (24) integer -> . INTEGER_VALUE
+    (25) float -> . FLOAT_VALUE
+    (22) boolean -> . TRUE
+    (23) boolean -> . FALSE
+    (26) string -> . STRING_VALUE
+    (21) id -> . ID
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    NOT             shift and go to state 43
+    INTEGER_VALUE   shift and go to state 31
+    FLOAT_VALUE     shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    STRING_VALUE    shift and go to state 35
+    ID              shift and go to state 36
+
+    expression                     shift and go to state 39
+    factor                         shift and go to state 40
+    unary                          shift and go to state 41
+    binary                         shift and go to state 42
+    value                          shift and go to state 23
+    variable                       shift and go to state 24
+    logical                        shift and go to state 44
+    math                           shift and go to state 45
+    integer                        shift and go to state 25
+    float                          shift and go to state 26
+    boolean                        shift and go to state 27
+    string                         shift and go to state 28
+    id                             shift and go to state 29
+    function_call                  shift and go to state 30
+
+state 14
+
+    (60) function -> DEF . ID LPAREN argument_list_definition RPAREN RETURN_TYPE type COLON block
+
+    ID              shift and go to state 46
+
+
+state 15
+
+    (3) statement_list -> statement_list statement .
+    (11) statement -> statement . NEWLINE
+
+  ! shift/reduce conflict for NEWLINE resolved as shift
+    ID              reduce using rule 3 (statement_list -> statement_list statement .)
+    IF              reduce using rule 3 (statement_list -> statement_list statement .)
+    WHILE           reduce using rule 3 (statement_list -> statement_list statement .)
+    RETURN          reduce using rule 3 (statement_list -> statement_list statement .)
+    DEF             reduce using rule 3 (statement_list -> statement_list statement .)
+    $end            reduce using rule 3 (statement_list -> statement_list statement .)
+    DEDENT          reduce using rule 3 (statement_list -> statement_list statement .)
+    NEWLINE         shift and go to state 17
+
+  ! NEWLINE         [ reduce using rule 3 (statement_list -> statement_list statement .) ]
+
+
+state 16
+
+    (4) statement_list -> statement_list NEWLINE .
+
+    NEWLINE         reduce using rule 4 (statement_list -> statement_list NEWLINE .)
+    ID              reduce using rule 4 (statement_list -> statement_list NEWLINE .)
+    IF              reduce using rule 4 (statement_list -> statement_list NEWLINE .)
+    WHILE           reduce using rule 4 (statement_list -> statement_list NEWLINE .)
+    RETURN          reduce using rule 4 (statement_list -> statement_list NEWLINE .)
+    DEF             reduce using rule 4 (statement_list -> statement_list NEWLINE .)
+    $end            reduce using rule 4 (statement_list -> statement_list NEWLINE .)
+    DEDENT          reduce using rule 4 (statement_list -> statement_list NEWLINE .)
+
+
+state 17
+
+    (11) statement -> statement NEWLINE .
+
+    NEWLINE         reduce using rule 11 (statement -> statement NEWLINE .)
+    ID              reduce using rule 11 (statement -> statement NEWLINE .)
+    IF              reduce using rule 11 (statement -> statement NEWLINE .)
+    WHILE           reduce using rule 11 (statement -> statement NEWLINE .)
+    RETURN          reduce using rule 11 (statement -> statement NEWLINE .)
+    DEF             reduce using rule 11 (statement -> statement NEWLINE .)
+    $end            reduce using rule 11 (statement -> statement NEWLINE .)
+    DEDENT          reduce using rule 11 (statement -> statement NEWLINE .)
+
+
+state 18
+
+    (14) assignment -> ID ASSIGN . expression
+    (50) expression -> . factor
+    (51) expression -> . unary
+    (52) expression -> . binary
+    (33) factor -> . value
+    (34) factor -> . variable
+    (35) unary -> . NOT
+    (48) binary -> . logical
+    (49) binary -> . math
+    (27) value -> . integer
+    (28) value -> . float
+    (29) value -> . boolean
+    (30) value -> . string
+    (31) variable -> . id
+    (32) variable -> . function_call
+    (36) logical -> . factor LT factor
+    (37) logical -> . factor LE factor
+    (38) logical -> . factor GT factor
+    (39) logical -> . factor GE factor
+    (40) logical -> . factor EQUALS factor
+    (41) logical -> . factor NEQUALS factor
+    (42) logical -> . factor AND factor
+    (43) logical -> . factor OR factor
+    (44) math -> . factor PLUS factor
+    (45) math -> . factor MINUS factor
+    (46) math -> . factor TIMES factor
+    (47) math -> . factor DIVIDE factor
+    (24) integer -> . INTEGER_VALUE
+    (25) float -> . FLOAT_VALUE
+    (22) boolean -> . TRUE
+    (23) boolean -> . FALSE
+    (26) string -> . STRING_VALUE
+    (21) id -> . ID
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    NOT             shift and go to state 43
+    INTEGER_VALUE   shift and go to state 31
+    FLOAT_VALUE     shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    STRING_VALUE    shift and go to state 35
+    ID              shift and go to state 36
+
+    expression                     shift and go to state 47
+    factor                         shift and go to state 40
+    unary                          shift and go to state 41
+    binary                         shift and go to state 42
+    value                          shift and go to state 23
+    variable                       shift and go to state 24
+    logical                        shift and go to state 44
+    math                           shift and go to state 45
+    integer                        shift and go to state 25
+    float                          shift and go to state 26
+    boolean                        shift and go to state 27
+    string                         shift and go to state 28
+    id                             shift and go to state 29
+    function_call                  shift and go to state 30
+
+state 19
+
+    (15) assignment -> ID COLON . type ASSIGN expression
+    (53) type -> . INT
+    (54) type -> . FLOAT
+    (55) type -> . STR
+    (56) type -> . BOOL
+    (57) type -> . VOID
+
+    INT             shift and go to state 49
+    FLOAT           shift and go to state 50
+    STR             shift and go to state 51
+    BOOL            shift and go to state 52
+    VOID            shift and go to state 53
+
+    type                           shift and go to state 48
+
+state 20
+
+    (61) function_call -> ID LPAREN . RPAREN
+    (62) function_call -> ID LPAREN . argument_list_call RPAREN
+    (63) argument_list_call -> . expression
+    (64) argument_list_call -> . expression COMMA argument_list_call
+    (50) expression -> . factor
+    (51) expression -> . unary
+    (52) expression -> . binary
+    (33) factor -> . value
+    (34) factor -> . variable
+    (35) unary -> . NOT
+    (48) binary -> . logical
+    (49) binary -> . math
+    (27) value -> . integer
+    (28) value -> . float
+    (29) value -> . boolean
+    (30) value -> . string
+    (31) variable -> . id
+    (32) variable -> . function_call
+    (36) logical -> . factor LT factor
+    (37) logical -> . factor LE factor
+    (38) logical -> . factor GT factor
+    (39) logical -> . factor GE factor
+    (40) logical -> . factor EQUALS factor
+    (41) logical -> . factor NEQUALS factor
+    (42) logical -> . factor AND factor
+    (43) logical -> . factor OR factor
+    (44) math -> . factor PLUS factor
+    (45) math -> . factor MINUS factor
+    (46) math -> . factor TIMES factor
+    (47) math -> . factor DIVIDE factor
+    (24) integer -> . INTEGER_VALUE
+    (25) float -> . FLOAT_VALUE
+    (22) boolean -> . TRUE
+    (23) boolean -> . FALSE
+    (26) string -> . STRING_VALUE
+    (21) id -> . ID
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    RPAREN          shift and go to state 54
+    NOT             shift and go to state 43
+    INTEGER_VALUE   shift and go to state 31
+    FLOAT_VALUE     shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    STRING_VALUE    shift and go to state 35
+    ID              shift and go to state 36
+
+    argument_list_call             shift and go to state 55
+    expression                     shift and go to state 56
+    factor                         shift and go to state 40
+    unary                          shift and go to state 41
+    binary                         shift and go to state 42
+    value                          shift and go to state 23
+    variable                       shift and go to state 24
+    logical                        shift and go to state 44
+    math                           shift and go to state 45
+    integer                        shift and go to state 25
+    float                          shift and go to state 26
+    boolean                        shift and go to state 27
+    string                         shift and go to state 28
+    id                             shift and go to state 29
+    function_call                  shift and go to state 30
+
+state 21
+
+    (16) if_statement -> IF logical . COLON block
+    (17) if_statement -> IF logical . COLON block NEWLINE ELSE COLON block
+
+    COLON           shift and go to state 57
+
+
+state 22
+
+    (36) logical -> factor . LT factor
+    (37) logical -> factor . LE factor
+    (38) logical -> factor . GT factor
+    (39) logical -> factor . GE factor
+    (40) logical -> factor . EQUALS factor
+    (41) logical -> factor . NEQUALS factor
+    (42) logical -> factor . AND factor
+    (43) logical -> factor . OR factor
+
+    LT              shift and go to state 58
+    LE              shift and go to state 59
+    GT              shift and go to state 60
+    GE              shift and go to state 61
+    EQUALS          shift and go to state 62
+    NEQUALS         shift and go to state 63
+    AND             shift and go to state 64
+    OR              shift and go to state 65
+
+
+state 23
+
+    (33) factor -> value .
+
+    LT              reduce using rule 33 (factor -> value .)
+    LE              reduce using rule 33 (factor -> value .)
+    GT              reduce using rule 33 (factor -> value .)
+    GE              reduce using rule 33 (factor -> value .)
+    EQUALS          reduce using rule 33 (factor -> value .)
+    NEQUALS         reduce using rule 33 (factor -> value .)
+    AND             reduce using rule 33 (factor -> value .)
+    OR              reduce using rule 33 (factor -> value .)
+    PLUS            reduce using rule 33 (factor -> value .)
+    MINUS           reduce using rule 33 (factor -> value .)
+    TIMES           reduce using rule 33 (factor -> value .)
+    DIVIDE          reduce using rule 33 (factor -> value .)
+    NEWLINE         reduce using rule 33 (factor -> value .)
+    ID              reduce using rule 33 (factor -> value .)
+    IF              reduce using rule 33 (factor -> value .)
+    WHILE           reduce using rule 33 (factor -> value .)
+    RETURN          reduce using rule 33 (factor -> value .)
+    DEF             reduce using rule 33 (factor -> value .)
+    $end            reduce using rule 33 (factor -> value .)
+    DEDENT          reduce using rule 33 (factor -> value .)
+    COMMA           reduce using rule 33 (factor -> value .)
+    RPAREN          reduce using rule 33 (factor -> value .)
+    COLON           reduce using rule 33 (factor -> value .)
+
+
+state 24
+
+    (34) factor -> variable .
+
+    LT              reduce using rule 34 (factor -> variable .)
+    LE              reduce using rule 34 (factor -> variable .)
+    GT              reduce using rule 34 (factor -> variable .)
+    GE              reduce using rule 34 (factor -> variable .)
+    EQUALS          reduce using rule 34 (factor -> variable .)
+    NEQUALS         reduce using rule 34 (factor -> variable .)
+    AND             reduce using rule 34 (factor -> variable .)
+    OR              reduce using rule 34 (factor -> variable .)
+    PLUS            reduce using rule 34 (factor -> variable .)
+    MINUS           reduce using rule 34 (factor -> variable .)
+    TIMES           reduce using rule 34 (factor -> variable .)
+    DIVIDE          reduce using rule 34 (factor -> variable .)
+    NEWLINE         reduce using rule 34 (factor -> variable .)
+    ID              reduce using rule 34 (factor -> variable .)
+    IF              reduce using rule 34 (factor -> variable .)
+    WHILE           reduce using rule 34 (factor -> variable .)
+    RETURN          reduce using rule 34 (factor -> variable .)
+    DEF             reduce using rule 34 (factor -> variable .)
+    $end            reduce using rule 34 (factor -> variable .)
+    DEDENT          reduce using rule 34 (factor -> variable .)
+    COMMA           reduce using rule 34 (factor -> variable .)
+    RPAREN          reduce using rule 34 (factor -> variable .)
+    COLON           reduce using rule 34 (factor -> variable .)
+
+
+state 25
+
+    (27) value -> integer .
+
+    LT              reduce using rule 27 (value -> integer .)
+    LE              reduce using rule 27 (value -> integer .)
+    GT              reduce using rule 27 (value -> integer .)
+    GE              reduce using rule 27 (value -> integer .)
+    EQUALS          reduce using rule 27 (value -> integer .)
+    NEQUALS         reduce using rule 27 (value -> integer .)
+    AND             reduce using rule 27 (value -> integer .)
+    OR              reduce using rule 27 (value -> integer .)
+    PLUS            reduce using rule 27 (value -> integer .)
+    MINUS           reduce using rule 27 (value -> integer .)
+    TIMES           reduce using rule 27 (value -> integer .)
+    DIVIDE          reduce using rule 27 (value -> integer .)
+    NEWLINE         reduce using rule 27 (value -> integer .)
+    ID              reduce using rule 27 (value -> integer .)
+    IF              reduce using rule 27 (value -> integer .)
+    WHILE           reduce using rule 27 (value -> integer .)
+    RETURN          reduce using rule 27 (value -> integer .)
+    DEF             reduce using rule 27 (value -> integer .)
+    $end            reduce using rule 27 (value -> integer .)
+    DEDENT          reduce using rule 27 (value -> integer .)
+    COMMA           reduce using rule 27 (value -> integer .)
+    RPAREN          reduce using rule 27 (value -> integer .)
+    COLON           reduce using rule 27 (value -> integer .)
+
+
+state 26
+
+    (28) value -> float .
+
+    LT              reduce using rule 28 (value -> float .)
+    LE              reduce using rule 28 (value -> float .)
+    GT              reduce using rule 28 (value -> float .)
+    GE              reduce using rule 28 (value -> float .)
+    EQUALS          reduce using rule 28 (value -> float .)
+    NEQUALS         reduce using rule 28 (value -> float .)
+    AND             reduce using rule 28 (value -> float .)
+    OR              reduce using rule 28 (value -> float .)
+    PLUS            reduce using rule 28 (value -> float .)
+    MINUS           reduce using rule 28 (value -> float .)
+    TIMES           reduce using rule 28 (value -> float .)
+    DIVIDE          reduce using rule 28 (value -> float .)
+    NEWLINE         reduce using rule 28 (value -> float .)
+    ID              reduce using rule 28 (value -> float .)
+    IF              reduce using rule 28 (value -> float .)
+    WHILE           reduce using rule 28 (value -> float .)
+    RETURN          reduce using rule 28 (value -> float .)
+    DEF             reduce using rule 28 (value -> float .)
+    $end            reduce using rule 28 (value -> float .)
+    DEDENT          reduce using rule 28 (value -> float .)
+    COMMA           reduce using rule 28 (value -> float .)
+    RPAREN          reduce using rule 28 (value -> float .)
+    COLON           reduce using rule 28 (value -> float .)
+
+
+state 27
+
+    (29) value -> boolean .
+
+    LT              reduce using rule 29 (value -> boolean .)
+    LE              reduce using rule 29 (value -> boolean .)
+    GT              reduce using rule 29 (value -> boolean .)
+    GE              reduce using rule 29 (value -> boolean .)
+    EQUALS          reduce using rule 29 (value -> boolean .)
+    NEQUALS         reduce using rule 29 (value -> boolean .)
+    AND             reduce using rule 29 (value -> boolean .)
+    OR              reduce using rule 29 (value -> boolean .)
+    PLUS            reduce using rule 29 (value -> boolean .)
+    MINUS           reduce using rule 29 (value -> boolean .)
+    TIMES           reduce using rule 29 (value -> boolean .)
+    DIVIDE          reduce using rule 29 (value -> boolean .)
+    NEWLINE         reduce using rule 29 (value -> boolean .)
+    ID              reduce using rule 29 (value -> boolean .)
+    IF              reduce using rule 29 (value -> boolean .)
+    WHILE           reduce using rule 29 (value -> boolean .)
+    RETURN          reduce using rule 29 (value -> boolean .)
+    DEF             reduce using rule 29 (value -> boolean .)
+    $end            reduce using rule 29 (value -> boolean .)
+    DEDENT          reduce using rule 29 (value -> boolean .)
+    COMMA           reduce using rule 29 (value -> boolean .)
+    RPAREN          reduce using rule 29 (value -> boolean .)
+    COLON           reduce using rule 29 (value -> boolean .)
+
+
+state 28
+
+    (30) value -> string .
+
+    LT              reduce using rule 30 (value -> string .)
+    LE              reduce using rule 30 (value -> string .)
+    GT              reduce using rule 30 (value -> string .)
+    GE              reduce using rule 30 (value -> string .)
+    EQUALS          reduce using rule 30 (value -> string .)
+    NEQUALS         reduce using rule 30 (value -> string .)
+    AND             reduce using rule 30 (value -> string .)
+    OR              reduce using rule 30 (value -> string .)
+    PLUS            reduce using rule 30 (value -> string .)
+    MINUS           reduce using rule 30 (value -> string .)
+    TIMES           reduce using rule 30 (value -> string .)
+    DIVIDE          reduce using rule 30 (value -> string .)
+    NEWLINE         reduce using rule 30 (value -> string .)
+    ID              reduce using rule 30 (value -> string .)
+    IF              reduce using rule 30 (value -> string .)
+    WHILE           reduce using rule 30 (value -> string .)
+    RETURN          reduce using rule 30 (value -> string .)
+    DEF             reduce using rule 30 (value -> string .)
+    $end            reduce using rule 30 (value -> string .)
+    DEDENT          reduce using rule 30 (value -> string .)
+    COMMA           reduce using rule 30 (value -> string .)
+    RPAREN          reduce using rule 30 (value -> string .)
+    COLON           reduce using rule 30 (value -> string .)
+
+
+state 29
+
+    (31) variable -> id .
+
+    LT              reduce using rule 31 (variable -> id .)
+    LE              reduce using rule 31 (variable -> id .)
+    GT              reduce using rule 31 (variable -> id .)
+    GE              reduce using rule 31 (variable -> id .)
+    EQUALS          reduce using rule 31 (variable -> id .)
+    NEQUALS         reduce using rule 31 (variable -> id .)
+    AND             reduce using rule 31 (variable -> id .)
+    OR              reduce using rule 31 (variable -> id .)
+    PLUS            reduce using rule 31 (variable -> id .)
+    MINUS           reduce using rule 31 (variable -> id .)
+    TIMES           reduce using rule 31 (variable -> id .)
+    DIVIDE          reduce using rule 31 (variable -> id .)
+    NEWLINE         reduce using rule 31 (variable -> id .)
+    ID              reduce using rule 31 (variable -> id .)
+    IF              reduce using rule 31 (variable -> id .)
+    WHILE           reduce using rule 31 (variable -> id .)
+    RETURN          reduce using rule 31 (variable -> id .)
+    DEF             reduce using rule 31 (variable -> id .)
+    $end            reduce using rule 31 (variable -> id .)
+    DEDENT          reduce using rule 31 (variable -> id .)
+    COMMA           reduce using rule 31 (variable -> id .)
+    RPAREN          reduce using rule 31 (variable -> id .)
+    COLON           reduce using rule 31 (variable -> id .)
+
+
+state 30
+
+    (32) variable -> function_call .
+
+    LT              reduce using rule 32 (variable -> function_call .)
+    LE              reduce using rule 32 (variable -> function_call .)
+    GT              reduce using rule 32 (variable -> function_call .)
+    GE              reduce using rule 32 (variable -> function_call .)
+    EQUALS          reduce using rule 32 (variable -> function_call .)
+    NEQUALS         reduce using rule 32 (variable -> function_call .)
+    AND             reduce using rule 32 (variable -> function_call .)
+    OR              reduce using rule 32 (variable -> function_call .)
+    PLUS            reduce using rule 32 (variable -> function_call .)
+    MINUS           reduce using rule 32 (variable -> function_call .)
+    TIMES           reduce using rule 32 (variable -> function_call .)
+    DIVIDE          reduce using rule 32 (variable -> function_call .)
+    NEWLINE         reduce using rule 32 (variable -> function_call .)
+    ID              reduce using rule 32 (variable -> function_call .)
+    IF              reduce using rule 32 (variable -> function_call .)
+    WHILE           reduce using rule 32 (variable -> function_call .)
+    RETURN          reduce using rule 32 (variable -> function_call .)
+    DEF             reduce using rule 32 (variable -> function_call .)
+    $end            reduce using rule 32 (variable -> function_call .)
+    DEDENT          reduce using rule 32 (variable -> function_call .)
+    COMMA           reduce using rule 32 (variable -> function_call .)
+    RPAREN          reduce using rule 32 (variable -> function_call .)
+    COLON           reduce using rule 32 (variable -> function_call .)
+
+
+state 31
+
+    (24) integer -> INTEGER_VALUE .
+
+    LT              reduce using rule 24 (integer -> INTEGER_VALUE .)
+    LE              reduce using rule 24 (integer -> INTEGER_VALUE .)
+    GT              reduce using rule 24 (integer -> INTEGER_VALUE .)
+    GE              reduce using rule 24 (integer -> INTEGER_VALUE .)
+    EQUALS          reduce using rule 24 (integer -> INTEGER_VALUE .)
+    NEQUALS         reduce using rule 24 (integer -> INTEGER_VALUE .)
+    AND             reduce using rule 24 (integer -> INTEGER_VALUE .)
+    OR              reduce using rule 24 (integer -> INTEGER_VALUE .)
+    PLUS            reduce using rule 24 (integer -> INTEGER_VALUE .)
+    MINUS           reduce using rule 24 (integer -> INTEGER_VALUE .)
+    TIMES           reduce using rule 24 (integer -> INTEGER_VALUE .)
+    DIVIDE          reduce using rule 24 (integer -> INTEGER_VALUE .)
+    NEWLINE         reduce using rule 24 (integer -> INTEGER_VALUE .)
+    ID              reduce using rule 24 (integer -> INTEGER_VALUE .)
+    IF              reduce using rule 24 (integer -> INTEGER_VALUE .)
+    WHILE           reduce using rule 24 (integer -> INTEGER_VALUE .)
+    RETURN          reduce using rule 24 (integer -> INTEGER_VALUE .)
+    DEF             reduce using rule 24 (integer -> INTEGER_VALUE .)
+    $end            reduce using rule 24 (integer -> INTEGER_VALUE .)
+    DEDENT          reduce using rule 24 (integer -> INTEGER_VALUE .)
+    COMMA           reduce using rule 24 (integer -> INTEGER_VALUE .)
+    RPAREN          reduce using rule 24 (integer -> INTEGER_VALUE .)
+    COLON           reduce using rule 24 (integer -> INTEGER_VALUE .)
+
+
+state 32
+
+    (25) float -> FLOAT_VALUE .
+
+    LT              reduce using rule 25 (float -> FLOAT_VALUE .)
+    LE              reduce using rule 25 (float -> FLOAT_VALUE .)
+    GT              reduce using rule 25 (float -> FLOAT_VALUE .)
+    GE              reduce using rule 25 (float -> FLOAT_VALUE .)
+    EQUALS          reduce using rule 25 (float -> FLOAT_VALUE .)
+    NEQUALS         reduce using rule 25 (float -> FLOAT_VALUE .)
+    AND             reduce using rule 25 (float -> FLOAT_VALUE .)
+    OR              reduce using rule 25 (float -> FLOAT_VALUE .)
+    PLUS            reduce using rule 25 (float -> FLOAT_VALUE .)
+    MINUS           reduce using rule 25 (float -> FLOAT_VALUE .)
+    TIMES           reduce using rule 25 (float -> FLOAT_VALUE .)
+    DIVIDE          reduce using rule 25 (float -> FLOAT_VALUE .)
+    NEWLINE         reduce using rule 25 (float -> FLOAT_VALUE .)
+    ID              reduce using rule 25 (float -> FLOAT_VALUE .)
+    IF              reduce using rule 25 (float -> FLOAT_VALUE .)
+    WHILE           reduce using rule 25 (float -> FLOAT_VALUE .)
+    RETURN          reduce using rule 25 (float -> FLOAT_VALUE .)
+    DEF             reduce using rule 25 (float -> FLOAT_VALUE .)
+    $end            reduce using rule 25 (float -> FLOAT_VALUE .)
+    DEDENT          reduce using rule 25 (float -> FLOAT_VALUE .)
+    COMMA           reduce using rule 25 (float -> FLOAT_VALUE .)
+    RPAREN          reduce using rule 25 (float -> FLOAT_VALUE .)
+    COLON           reduce using rule 25 (float -> FLOAT_VALUE .)
+
+
+state 33
+
+    (22) boolean -> TRUE .
+
+    LT              reduce using rule 22 (boolean -> TRUE .)
+    LE              reduce using rule 22 (boolean -> TRUE .)
+    GT              reduce using rule 22 (boolean -> TRUE .)
+    GE              reduce using rule 22 (boolean -> TRUE .)
+    EQUALS          reduce using rule 22 (boolean -> TRUE .)
+    NEQUALS         reduce using rule 22 (boolean -> TRUE .)
+    AND             reduce using rule 22 (boolean -> TRUE .)
+    OR              reduce using rule 22 (boolean -> TRUE .)
+    PLUS            reduce using rule 22 (boolean -> TRUE .)
+    MINUS           reduce using rule 22 (boolean -> TRUE .)
+    TIMES           reduce using rule 22 (boolean -> TRUE .)
+    DIVIDE          reduce using rule 22 (boolean -> TRUE .)
+    NEWLINE         reduce using rule 22 (boolean -> TRUE .)
+    ID              reduce using rule 22 (boolean -> TRUE .)
+    IF              reduce using rule 22 (boolean -> TRUE .)
+    WHILE           reduce using rule 22 (boolean -> TRUE .)
+    RETURN          reduce using rule 22 (boolean -> TRUE .)
+    DEF             reduce using rule 22 (boolean -> TRUE .)
+    $end            reduce using rule 22 (boolean -> TRUE .)
+    DEDENT          reduce using rule 22 (boolean -> TRUE .)
+    COMMA           reduce using rule 22 (boolean -> TRUE .)
+    RPAREN          reduce using rule 22 (boolean -> TRUE .)
+    COLON           reduce using rule 22 (boolean -> TRUE .)
+
+
+state 34
+
+    (23) boolean -> FALSE .
+
+    LT              reduce using rule 23 (boolean -> FALSE .)
+    LE              reduce using rule 23 (boolean -> FALSE .)
+    GT              reduce using rule 23 (boolean -> FALSE .)
+    GE              reduce using rule 23 (boolean -> FALSE .)
+    EQUALS          reduce using rule 23 (boolean -> FALSE .)
+    NEQUALS         reduce using rule 23 (boolean -> FALSE .)
+    AND             reduce using rule 23 (boolean -> FALSE .)
+    OR              reduce using rule 23 (boolean -> FALSE .)
+    PLUS            reduce using rule 23 (boolean -> FALSE .)
+    MINUS           reduce using rule 23 (boolean -> FALSE .)
+    TIMES           reduce using rule 23 (boolean -> FALSE .)
+    DIVIDE          reduce using rule 23 (boolean -> FALSE .)
+    NEWLINE         reduce using rule 23 (boolean -> FALSE .)
+    ID              reduce using rule 23 (boolean -> FALSE .)
+    IF              reduce using rule 23 (boolean -> FALSE .)
+    WHILE           reduce using rule 23 (boolean -> FALSE .)
+    RETURN          reduce using rule 23 (boolean -> FALSE .)
+    DEF             reduce using rule 23 (boolean -> FALSE .)
+    $end            reduce using rule 23 (boolean -> FALSE .)
+    DEDENT          reduce using rule 23 (boolean -> FALSE .)
+    COMMA           reduce using rule 23 (boolean -> FALSE .)
+    RPAREN          reduce using rule 23 (boolean -> FALSE .)
+    COLON           reduce using rule 23 (boolean -> FALSE .)
+
+
+state 35
+
+    (26) string -> STRING_VALUE .
+
+    LT              reduce using rule 26 (string -> STRING_VALUE .)
+    LE              reduce using rule 26 (string -> STRING_VALUE .)
+    GT              reduce using rule 26 (string -> STRING_VALUE .)
+    GE              reduce using rule 26 (string -> STRING_VALUE .)
+    EQUALS          reduce using rule 26 (string -> STRING_VALUE .)
+    NEQUALS         reduce using rule 26 (string -> STRING_VALUE .)
+    AND             reduce using rule 26 (string -> STRING_VALUE .)
+    OR              reduce using rule 26 (string -> STRING_VALUE .)
+    PLUS            reduce using rule 26 (string -> STRING_VALUE .)
+    MINUS           reduce using rule 26 (string -> STRING_VALUE .)
+    TIMES           reduce using rule 26 (string -> STRING_VALUE .)
+    DIVIDE          reduce using rule 26 (string -> STRING_VALUE .)
+    NEWLINE         reduce using rule 26 (string -> STRING_VALUE .)
+    ID              reduce using rule 26 (string -> STRING_VALUE .)
+    IF              reduce using rule 26 (string -> STRING_VALUE .)
+    WHILE           reduce using rule 26 (string -> STRING_VALUE .)
+    RETURN          reduce using rule 26 (string -> STRING_VALUE .)
+    DEF             reduce using rule 26 (string -> STRING_VALUE .)
+    $end            reduce using rule 26 (string -> STRING_VALUE .)
+    DEDENT          reduce using rule 26 (string -> STRING_VALUE .)
+    COMMA           reduce using rule 26 (string -> STRING_VALUE .)
+    RPAREN          reduce using rule 26 (string -> STRING_VALUE .)
+    COLON           reduce using rule 26 (string -> STRING_VALUE .)
+
+
+state 36
+
+    (21) id -> ID .
+    (61) function_call -> ID . LPAREN RPAREN
+    (62) function_call -> ID . LPAREN argument_list_call RPAREN
+
+    LT              reduce using rule 21 (id -> ID .)
+    LE              reduce using rule 21 (id -> ID .)
+    GT              reduce using rule 21 (id -> ID .)
+    GE              reduce using rule 21 (id -> ID .)
+    EQUALS          reduce using rule 21 (id -> ID .)
+    NEQUALS         reduce using rule 21 (id -> ID .)
+    AND             reduce using rule 21 (id -> ID .)
+    OR              reduce using rule 21 (id -> ID .)
+    PLUS            reduce using rule 21 (id -> ID .)
+    MINUS           reduce using rule 21 (id -> ID .)
+    TIMES           reduce using rule 21 (id -> ID .)
+    DIVIDE          reduce using rule 21 (id -> ID .)
+    NEWLINE         reduce using rule 21 (id -> ID .)
+    ID              reduce using rule 21 (id -> ID .)
+    IF              reduce using rule 21 (id -> ID .)
+    WHILE           reduce using rule 21 (id -> ID .)
+    RETURN          reduce using rule 21 (id -> ID .)
+    DEF             reduce using rule 21 (id -> ID .)
+    $end            reduce using rule 21 (id -> ID .)
+    DEDENT          reduce using rule 21 (id -> ID .)
+    COMMA           reduce using rule 21 (id -> ID .)
+    RPAREN          reduce using rule 21 (id -> ID .)
+    COLON           reduce using rule 21 (id -> ID .)
+    LPAREN          shift and go to state 20
+
+
+state 37
+
+    (18) while_statement -> WHILE logical . COLON block
+
+    COLON           shift and go to state 66
+
+
+state 38
+
+    (19) while_statement -> WHILE TRUE . COLON block
+    (22) boolean -> TRUE .
+
+    COLON           shift and go to state 67
+    LT              reduce using rule 22 (boolean -> TRUE .)
+    LE              reduce using rule 22 (boolean -> TRUE .)
+    GT              reduce using rule 22 (boolean -> TRUE .)
+    GE              reduce using rule 22 (boolean -> TRUE .)
+    EQUALS          reduce using rule 22 (boolean -> TRUE .)
+    NEQUALS         reduce using rule 22 (boolean -> TRUE .)
+    AND             reduce using rule 22 (boolean -> TRUE .)
+    OR              reduce using rule 22 (boolean -> TRUE .)
+
+
+state 39
+
+    (20) return_statement -> RETURN expression .
+
+    NEWLINE         reduce using rule 20 (return_statement -> RETURN expression .)
+    ID              reduce using rule 20 (return_statement -> RETURN expression .)
+    IF              reduce using rule 20 (return_statement -> RETURN expression .)
+    WHILE           reduce using rule 20 (return_statement -> RETURN expression .)
+    RETURN          reduce using rule 20 (return_statement -> RETURN expression .)
+    DEF             reduce using rule 20 (return_statement -> RETURN expression .)
+    $end            reduce using rule 20 (return_statement -> RETURN expression .)
+    DEDENT          reduce using rule 20 (return_statement -> RETURN expression .)
+
+
+state 40
+
+    (50) expression -> factor .
+    (36) logical -> factor . LT factor
+    (37) logical -> factor . LE factor
+    (38) logical -> factor . GT factor
+    (39) logical -> factor . GE factor
+    (40) logical -> factor . EQUALS factor
+    (41) logical -> factor . NEQUALS factor
+    (42) logical -> factor . AND factor
+    (43) logical -> factor . OR factor
+    (44) math -> factor . PLUS factor
+    (45) math -> factor . MINUS factor
+    (46) math -> factor . TIMES factor
+    (47) math -> factor . DIVIDE factor
+
+    NEWLINE         reduce using rule 50 (expression -> factor .)
+    ID              reduce using rule 50 (expression -> factor .)
+    IF              reduce using rule 50 (expression -> factor .)
+    WHILE           reduce using rule 50 (expression -> factor .)
+    RETURN          reduce using rule 50 (expression -> factor .)
+    DEF             reduce using rule 50 (expression -> factor .)
+    $end            reduce using rule 50 (expression -> factor .)
+    DEDENT          reduce using rule 50 (expression -> factor .)
+    COMMA           reduce using rule 50 (expression -> factor .)
+    RPAREN          reduce using rule 50 (expression -> factor .)
+    LT              shift and go to state 58
+    LE              shift and go to state 59
+    GT              shift and go to state 60
+    GE              shift and go to state 61
+    EQUALS          shift and go to state 62
+    NEQUALS         shift and go to state 63
+    AND             shift and go to state 64
+    OR              shift and go to state 65
+    PLUS            shift and go to state 68
+    MINUS           shift and go to state 69
+    TIMES           shift and go to state 70
+    DIVIDE          shift and go to state 71
+
+
+state 41
+
+    (51) expression -> unary .
+
+    NEWLINE         reduce using rule 51 (expression -> unary .)
+    ID              reduce using rule 51 (expression -> unary .)
+    IF              reduce using rule 51 (expression -> unary .)
+    WHILE           reduce using rule 51 (expression -> unary .)
+    RETURN          reduce using rule 51 (expression -> unary .)
+    DEF             reduce using rule 51 (expression -> unary .)
+    $end            reduce using rule 51 (expression -> unary .)
+    DEDENT          reduce using rule 51 (expression -> unary .)
+    COMMA           reduce using rule 51 (expression -> unary .)
+    RPAREN          reduce using rule 51 (expression -> unary .)
+
+
+state 42
+
+    (52) expression -> binary .
+
+    NEWLINE         reduce using rule 52 (expression -> binary .)
+    ID              reduce using rule 52 (expression -> binary .)
+    IF              reduce using rule 52 (expression -> binary .)
+    WHILE           reduce using rule 52 (expression -> binary .)
+    RETURN          reduce using rule 52 (expression -> binary .)
+    DEF             reduce using rule 52 (expression -> binary .)
+    $end            reduce using rule 52 (expression -> binary .)
+    DEDENT          reduce using rule 52 (expression -> binary .)
+    COMMA           reduce using rule 52 (expression -> binary .)
+    RPAREN          reduce using rule 52 (expression -> binary .)
+
+
+state 43
+
+    (35) unary -> NOT .
+
+    NEWLINE         reduce using rule 35 (unary -> NOT .)
+    ID              reduce using rule 35 (unary -> NOT .)
+    IF              reduce using rule 35 (unary -> NOT .)
+    WHILE           reduce using rule 35 (unary -> NOT .)
+    RETURN          reduce using rule 35 (unary -> NOT .)
+    DEF             reduce using rule 35 (unary -> NOT .)
+    $end            reduce using rule 35 (unary -> NOT .)
+    DEDENT          reduce using rule 35 (unary -> NOT .)
+    COMMA           reduce using rule 35 (unary -> NOT .)
+    RPAREN          reduce using rule 35 (unary -> NOT .)
+
+
+state 44
+
+    (48) binary -> logical .
+
+    NEWLINE         reduce using rule 48 (binary -> logical .)
+    ID              reduce using rule 48 (binary -> logical .)
+    IF              reduce using rule 48 (binary -> logical .)
+    WHILE           reduce using rule 48 (binary -> logical .)
+    RETURN          reduce using rule 48 (binary -> logical .)
+    DEF             reduce using rule 48 (binary -> logical .)
+    $end            reduce using rule 48 (binary -> logical .)
+    DEDENT          reduce using rule 48 (binary -> logical .)
+    COMMA           reduce using rule 48 (binary -> logical .)
+    RPAREN          reduce using rule 48 (binary -> logical .)
+
+
+state 45
+
+    (49) binary -> math .
+
+    NEWLINE         reduce using rule 49 (binary -> math .)
+    ID              reduce using rule 49 (binary -> math .)
+    IF              reduce using rule 49 (binary -> math .)
+    WHILE           reduce using rule 49 (binary -> math .)
+    RETURN          reduce using rule 49 (binary -> math .)
+    DEF             reduce using rule 49 (binary -> math .)
+    $end            reduce using rule 49 (binary -> math .)
+    DEDENT          reduce using rule 49 (binary -> math .)
+    COMMA           reduce using rule 49 (binary -> math .)
+    RPAREN          reduce using rule 49 (binary -> math .)
+
+
+state 46
+
+    (60) function -> DEF ID . LPAREN argument_list_definition RPAREN RETURN_TYPE type COLON block
+
+    LPAREN          shift and go to state 72
+
+
+state 47
+
+    (14) assignment -> ID ASSIGN expression .
+
+    NEWLINE         reduce using rule 14 (assignment -> ID ASSIGN expression .)
+    ID              reduce using rule 14 (assignment -> ID ASSIGN expression .)
+    IF              reduce using rule 14 (assignment -> ID ASSIGN expression .)
+    WHILE           reduce using rule 14 (assignment -> ID ASSIGN expression .)
+    RETURN          reduce using rule 14 (assignment -> ID ASSIGN expression .)
+    DEF             reduce using rule 14 (assignment -> ID ASSIGN expression .)
+    $end            reduce using rule 14 (assignment -> ID ASSIGN expression .)
+    DEDENT          reduce using rule 14 (assignment -> ID ASSIGN expression .)
+
+
+state 48
+
+    (15) assignment -> ID COLON type . ASSIGN expression
+
+    ASSIGN          shift and go to state 73
+
+
+state 49
+
+    (53) type -> INT .
+
+    ASSIGN          reduce using rule 53 (type -> INT .)
+    COMMA           reduce using rule 53 (type -> INT .)
+    RPAREN          reduce using rule 53 (type -> INT .)
+    COLON           reduce using rule 53 (type -> INT .)
+
+
+state 50
+
+    (54) type -> FLOAT .
+
+    ASSIGN          reduce using rule 54 (type -> FLOAT .)
+    COMMA           reduce using rule 54 (type -> FLOAT .)
+    RPAREN          reduce using rule 54 (type -> FLOAT .)
+    COLON           reduce using rule 54 (type -> FLOAT .)
+
+
+state 51
+
+    (55) type -> STR .
+
+    ASSIGN          reduce using rule 55 (type -> STR .)
+    COMMA           reduce using rule 55 (type -> STR .)
+    RPAREN          reduce using rule 55 (type -> STR .)
+    COLON           reduce using rule 55 (type -> STR .)
+
+
+state 52
+
+    (56) type -> BOOL .
+
+    ASSIGN          reduce using rule 56 (type -> BOOL .)
+    COMMA           reduce using rule 56 (type -> BOOL .)
+    RPAREN          reduce using rule 56 (type -> BOOL .)
+    COLON           reduce using rule 56 (type -> BOOL .)
+
+
+state 53
+
+    (57) type -> VOID .
+
+    ASSIGN          reduce using rule 57 (type -> VOID .)
+    COMMA           reduce using rule 57 (type -> VOID .)
+    RPAREN          reduce using rule 57 (type -> VOID .)
+    COLON           reduce using rule 57 (type -> VOID .)
+
+
+state 54
+
+    (61) function_call -> ID LPAREN RPAREN .
+
+    NEWLINE         reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    ID              reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    IF              reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    WHILE           reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    RETURN          reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    DEF             reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    $end            reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    LT              reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    LE              reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    GT              reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    GE              reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    EQUALS          reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    NEQUALS         reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    AND             reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    OR              reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    PLUS            reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    MINUS           reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    TIMES           reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    DIVIDE          reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    DEDENT          reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    COMMA           reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    RPAREN          reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+    COLON           reduce using rule 61 (function_call -> ID LPAREN RPAREN .)
+
+
+state 55
+
+    (62) function_call -> ID LPAREN argument_list_call . RPAREN
+
+    RPAREN          shift and go to state 74
+
+
+state 56
+
+    (63) argument_list_call -> expression .
+    (64) argument_list_call -> expression . COMMA argument_list_call
+
+    RPAREN          reduce using rule 63 (argument_list_call -> expression .)
+    COMMA           shift and go to state 75
+
+
+state 57
+
+    (16) if_statement -> IF logical COLON . block
+    (17) if_statement -> IF logical COLON . block NEWLINE ELSE COLON block
+    (12) block -> . INDENT statement_list DEDENT
+    (13) block -> . block NEWLINE
+
+    INDENT          shift and go to state 77
+
+    block                          shift and go to state 76
+
+state 58
+
+    (36) logical -> factor LT . factor
+    (33) factor -> . value
+    (34) factor -> . variable
+    (27) value -> . integer
+    (28) value -> . float
+    (29) value -> . boolean
+    (30) value -> . string
+    (31) variable -> . id
+    (32) variable -> . function_call
+    (24) integer -> . INTEGER_VALUE
+    (25) float -> . FLOAT_VALUE
+    (22) boolean -> . TRUE
+    (23) boolean -> . FALSE
+    (26) string -> . STRING_VALUE
+    (21) id -> . ID
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    INTEGER_VALUE   shift and go to state 31
+    FLOAT_VALUE     shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    STRING_VALUE    shift and go to state 35
+    ID              shift and go to state 36
+
+    factor                         shift and go to state 78
+    value                          shift and go to state 23
+    variable                       shift and go to state 24
+    integer                        shift and go to state 25
+    float                          shift and go to state 26
+    boolean                        shift and go to state 27
+    string                         shift and go to state 28
+    id                             shift and go to state 29
+    function_call                  shift and go to state 30
+
+state 59
+
+    (37) logical -> factor LE . factor
+    (33) factor -> . value
+    (34) factor -> . variable
+    (27) value -> . integer
+    (28) value -> . float
+    (29) value -> . boolean
+    (30) value -> . string
+    (31) variable -> . id
+    (32) variable -> . function_call
+    (24) integer -> . INTEGER_VALUE
+    (25) float -> . FLOAT_VALUE
+    (22) boolean -> . TRUE
+    (23) boolean -> . FALSE
+    (26) string -> . STRING_VALUE
+    (21) id -> . ID
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    INTEGER_VALUE   shift and go to state 31
+    FLOAT_VALUE     shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    STRING_VALUE    shift and go to state 35
+    ID              shift and go to state 36
+
+    factor                         shift and go to state 79
+    value                          shift and go to state 23
+    variable                       shift and go to state 24
+    integer                        shift and go to state 25
+    float                          shift and go to state 26
+    boolean                        shift and go to state 27
+    string                         shift and go to state 28
+    id                             shift and go to state 29
+    function_call                  shift and go to state 30
+
+state 60
+
+    (38) logical -> factor GT . factor
+    (33) factor -> . value
+    (34) factor -> . variable
+    (27) value -> . integer
+    (28) value -> . float
+    (29) value -> . boolean
+    (30) value -> . string
+    (31) variable -> . id
+    (32) variable -> . function_call
+    (24) integer -> . INTEGER_VALUE
+    (25) float -> . FLOAT_VALUE
+    (22) boolean -> . TRUE
+    (23) boolean -> . FALSE
+    (26) string -> . STRING_VALUE
+    (21) id -> . ID
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    INTEGER_VALUE   shift and go to state 31
+    FLOAT_VALUE     shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    STRING_VALUE    shift and go to state 35
+    ID              shift and go to state 36
+
+    factor                         shift and go to state 80
+    value                          shift and go to state 23
+    variable                       shift and go to state 24
+    integer                        shift and go to state 25
+    float                          shift and go to state 26
+    boolean                        shift and go to state 27
+    string                         shift and go to state 28
+    id                             shift and go to state 29
+    function_call                  shift and go to state 30
+
+state 61
+
+    (39) logical -> factor GE . factor
+    (33) factor -> . value
+    (34) factor -> . variable
+    (27) value -> . integer
+    (28) value -> . float
+    (29) value -> . boolean
+    (30) value -> . string
+    (31) variable -> . id
+    (32) variable -> . function_call
+    (24) integer -> . INTEGER_VALUE
+    (25) float -> . FLOAT_VALUE
+    (22) boolean -> . TRUE
+    (23) boolean -> . FALSE
+    (26) string -> . STRING_VALUE
+    (21) id -> . ID
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    INTEGER_VALUE   shift and go to state 31
+    FLOAT_VALUE     shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    STRING_VALUE    shift and go to state 35
+    ID              shift and go to state 36
+
+    factor                         shift and go to state 81
+    value                          shift and go to state 23
+    variable                       shift and go to state 24
+    integer                        shift and go to state 25
+    float                          shift and go to state 26
+    boolean                        shift and go to state 27
+    string                         shift and go to state 28
+    id                             shift and go to state 29
+    function_call                  shift and go to state 30
+
+state 62
+
+    (40) logical -> factor EQUALS . factor
+    (33) factor -> . value
+    (34) factor -> . variable
+    (27) value -> . integer
+    (28) value -> . float
+    (29) value -> . boolean
+    (30) value -> . string
+    (31) variable -> . id
+    (32) variable -> . function_call
+    (24) integer -> . INTEGER_VALUE
+    (25) float -> . FLOAT_VALUE
+    (22) boolean -> . TRUE
+    (23) boolean -> . FALSE
+    (26) string -> . STRING_VALUE
+    (21) id -> . ID
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    INTEGER_VALUE   shift and go to state 31
+    FLOAT_VALUE     shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    STRING_VALUE    shift and go to state 35
+    ID              shift and go to state 36
+
+    factor                         shift and go to state 82
+    value                          shift and go to state 23
+    variable                       shift and go to state 24
+    integer                        shift and go to state 25
+    float                          shift and go to state 26
+    boolean                        shift and go to state 27
+    string                         shift and go to state 28
+    id                             shift and go to state 29
+    function_call                  shift and go to state 30
+
+state 63
+
+    (41) logical -> factor NEQUALS . factor
+    (33) factor -> . value
+    (34) factor -> . variable
+    (27) value -> . integer
+    (28) value -> . float
+    (29) value -> . boolean
+    (30) value -> . string
+    (31) variable -> . id
+    (32) variable -> . function_call
+    (24) integer -> . INTEGER_VALUE
+    (25) float -> . FLOAT_VALUE
+    (22) boolean -> . TRUE
+    (23) boolean -> . FALSE
+    (26) string -> . STRING_VALUE
+    (21) id -> . ID
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    INTEGER_VALUE   shift and go to state 31
+    FLOAT_VALUE     shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    STRING_VALUE    shift and go to state 35
+    ID              shift and go to state 36
+
+    factor                         shift and go to state 83
+    value                          shift and go to state 23
+    variable                       shift and go to state 24
+    integer                        shift and go to state 25
+    float                          shift and go to state 26
+    boolean                        shift and go to state 27
+    string                         shift and go to state 28
+    id                             shift and go to state 29
+    function_call                  shift and go to state 30
+
+state 64
+
+    (42) logical -> factor AND . factor
+    (33) factor -> . value
+    (34) factor -> . variable
+    (27) value -> . integer
+    (28) value -> . float
+    (29) value -> . boolean
+    (30) value -> . string
+    (31) variable -> . id
+    (32) variable -> . function_call
+    (24) integer -> . INTEGER_VALUE
+    (25) float -> . FLOAT_VALUE
+    (22) boolean -> . TRUE
+    (23) boolean -> . FALSE
+    (26) string -> . STRING_VALUE
+    (21) id -> . ID
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    INTEGER_VALUE   shift and go to state 31
+    FLOAT_VALUE     shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    STRING_VALUE    shift and go to state 35
+    ID              shift and go to state 36
+
+    factor                         shift and go to state 84
+    value                          shift and go to state 23
+    variable                       shift and go to state 24
+    integer                        shift and go to state 25
+    float                          shift and go to state 26
+    boolean                        shift and go to state 27
+    string                         shift and go to state 28
+    id                             shift and go to state 29
+    function_call                  shift and go to state 30
+
+state 65
+
+    (43) logical -> factor OR . factor
+    (33) factor -> . value
+    (34) factor -> . variable
+    (27) value -> . integer
+    (28) value -> . float
+    (29) value -> . boolean
+    (30) value -> . string
+    (31) variable -> . id
+    (32) variable -> . function_call
+    (24) integer -> . INTEGER_VALUE
+    (25) float -> . FLOAT_VALUE
+    (22) boolean -> . TRUE
+    (23) boolean -> . FALSE
+    (26) string -> . STRING_VALUE
+    (21) id -> . ID
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    INTEGER_VALUE   shift and go to state 31
+    FLOAT_VALUE     shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    STRING_VALUE    shift and go to state 35
+    ID              shift and go to state 36
+
+    factor                         shift and go to state 85
+    value                          shift and go to state 23
+    variable                       shift and go to state 24
+    integer                        shift and go to state 25
+    float                          shift and go to state 26
+    boolean                        shift and go to state 27
+    string                         shift and go to state 28
+    id                             shift and go to state 29
+    function_call                  shift and go to state 30
+
+state 66
+
+    (18) while_statement -> WHILE logical COLON . block
+    (12) block -> . INDENT statement_list DEDENT
+    (13) block -> . block NEWLINE
+
+    INDENT          shift and go to state 77
+
+    block                          shift and go to state 86
+
+state 67
+
+    (19) while_statement -> WHILE TRUE COLON . block
+    (12) block -> . INDENT statement_list DEDENT
+    (13) block -> . block NEWLINE
+
+    INDENT          shift and go to state 77
+
+    block                          shift and go to state 87
+
+state 68
+
+    (44) math -> factor PLUS . factor
+    (33) factor -> . value
+    (34) factor -> . variable
+    (27) value -> . integer
+    (28) value -> . float
+    (29) value -> . boolean
+    (30) value -> . string
+    (31) variable -> . id
+    (32) variable -> . function_call
+    (24) integer -> . INTEGER_VALUE
+    (25) float -> . FLOAT_VALUE
+    (22) boolean -> . TRUE
+    (23) boolean -> . FALSE
+    (26) string -> . STRING_VALUE
+    (21) id -> . ID
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    INTEGER_VALUE   shift and go to state 31
+    FLOAT_VALUE     shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    STRING_VALUE    shift and go to state 35
+    ID              shift and go to state 36
+
+    factor                         shift and go to state 88
+    value                          shift and go to state 23
+    variable                       shift and go to state 24
+    integer                        shift and go to state 25
+    float                          shift and go to state 26
+    boolean                        shift and go to state 27
+    string                         shift and go to state 28
+    id                             shift and go to state 29
+    function_call                  shift and go to state 30
+
+state 69
+
+    (45) math -> factor MINUS . factor
+    (33) factor -> . value
+    (34) factor -> . variable
+    (27) value -> . integer
+    (28) value -> . float
+    (29) value -> . boolean
+    (30) value -> . string
+    (31) variable -> . id
+    (32) variable -> . function_call
+    (24) integer -> . INTEGER_VALUE
+    (25) float -> . FLOAT_VALUE
+    (22) boolean -> . TRUE
+    (23) boolean -> . FALSE
+    (26) string -> . STRING_VALUE
+    (21) id -> . ID
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    INTEGER_VALUE   shift and go to state 31
+    FLOAT_VALUE     shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    STRING_VALUE    shift and go to state 35
+    ID              shift and go to state 36
+
+    factor                         shift and go to state 89
+    value                          shift and go to state 23
+    variable                       shift and go to state 24
+    integer                        shift and go to state 25
+    float                          shift and go to state 26
+    boolean                        shift and go to state 27
+    string                         shift and go to state 28
+    id                             shift and go to state 29
+    function_call                  shift and go to state 30
+
+state 70
+
+    (46) math -> factor TIMES . factor
+    (33) factor -> . value
+    (34) factor -> . variable
+    (27) value -> . integer
+    (28) value -> . float
+    (29) value -> . boolean
+    (30) value -> . string
+    (31) variable -> . id
+    (32) variable -> . function_call
+    (24) integer -> . INTEGER_VALUE
+    (25) float -> . FLOAT_VALUE
+    (22) boolean -> . TRUE
+    (23) boolean -> . FALSE
+    (26) string -> . STRING_VALUE
+    (21) id -> . ID
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    INTEGER_VALUE   shift and go to state 31
+    FLOAT_VALUE     shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    STRING_VALUE    shift and go to state 35
+    ID              shift and go to state 36
+
+    factor                         shift and go to state 90
+    value                          shift and go to state 23
+    variable                       shift and go to state 24
+    integer                        shift and go to state 25
+    float                          shift and go to state 26
+    boolean                        shift and go to state 27
+    string                         shift and go to state 28
+    id                             shift and go to state 29
+    function_call                  shift and go to state 30
+
+state 71
+
+    (47) math -> factor DIVIDE . factor
+    (33) factor -> . value
+    (34) factor -> . variable
+    (27) value -> . integer
+    (28) value -> . float
+    (29) value -> . boolean
+    (30) value -> . string
+    (31) variable -> . id
+    (32) variable -> . function_call
+    (24) integer -> . INTEGER_VALUE
+    (25) float -> . FLOAT_VALUE
+    (22) boolean -> . TRUE
+    (23) boolean -> . FALSE
+    (26) string -> . STRING_VALUE
+    (21) id -> . ID
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    INTEGER_VALUE   shift and go to state 31
+    FLOAT_VALUE     shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    STRING_VALUE    shift and go to state 35
+    ID              shift and go to state 36
+
+    factor                         shift and go to state 91
+    value                          shift and go to state 23
+    variable                       shift and go to state 24
+    integer                        shift and go to state 25
+    float                          shift and go to state 26
+    boolean                        shift and go to state 27
+    string                         shift and go to state 28
+    id                             shift and go to state 29
+    function_call                  shift and go to state 30
+
+state 72
+
+    (60) function -> DEF ID LPAREN . argument_list_definition RPAREN RETURN_TYPE type COLON block
+    (58) argument_list_definition -> . ID COLON type
+    (59) argument_list_definition -> . ID COLON type COMMA argument_list_definition
+
+    ID              shift and go to state 92
+
+    argument_list_definition       shift and go to state 93
+
+state 73
+
+    (15) assignment -> ID COLON type ASSIGN . expression
+    (50) expression -> . factor
+    (51) expression -> . unary
+    (52) expression -> . binary
+    (33) factor -> . value
+    (34) factor -> . variable
+    (35) unary -> . NOT
+    (48) binary -> . logical
+    (49) binary -> . math
+    (27) value -> . integer
+    (28) value -> . float
+    (29) value -> . boolean
+    (30) value -> . string
+    (31) variable -> . id
+    (32) variable -> . function_call
+    (36) logical -> . factor LT factor
+    (37) logical -> . factor LE factor
+    (38) logical -> . factor GT factor
+    (39) logical -> . factor GE factor
+    (40) logical -> . factor EQUALS factor
+    (41) logical -> . factor NEQUALS factor
+    (42) logical -> . factor AND factor
+    (43) logical -> . factor OR factor
+    (44) math -> . factor PLUS factor
+    (45) math -> . factor MINUS factor
+    (46) math -> . factor TIMES factor
+    (47) math -> . factor DIVIDE factor
+    (24) integer -> . INTEGER_VALUE
+    (25) float -> . FLOAT_VALUE
+    (22) boolean -> . TRUE
+    (23) boolean -> . FALSE
+    (26) string -> . STRING_VALUE
+    (21) id -> . ID
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    NOT             shift and go to state 43
+    INTEGER_VALUE   shift and go to state 31
+    FLOAT_VALUE     shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    STRING_VALUE    shift and go to state 35
+    ID              shift and go to state 36
+
+    expression                     shift and go to state 94
+    factor                         shift and go to state 40
+    unary                          shift and go to state 41
+    binary                         shift and go to state 42
+    value                          shift and go to state 23
+    variable                       shift and go to state 24
+    logical                        shift and go to state 44
+    math                           shift and go to state 45
+    integer                        shift and go to state 25
+    float                          shift and go to state 26
+    boolean                        shift and go to state 27
+    string                         shift and go to state 28
+    id                             shift and go to state 29
+    function_call                  shift and go to state 30
+
+state 74
+
+    (62) function_call -> ID LPAREN argument_list_call RPAREN .
+
+    NEWLINE         reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    ID              reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    IF              reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    WHILE           reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    RETURN          reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    DEF             reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    $end            reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    LT              reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    LE              reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    GT              reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    GE              reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    EQUALS          reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    NEQUALS         reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    AND             reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    OR              reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    PLUS            reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    MINUS           reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    TIMES           reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    DIVIDE          reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    DEDENT          reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    COMMA           reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    RPAREN          reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+    COLON           reduce using rule 62 (function_call -> ID LPAREN argument_list_call RPAREN .)
+
+
+state 75
+
+    (64) argument_list_call -> expression COMMA . argument_list_call
+    (63) argument_list_call -> . expression
+    (64) argument_list_call -> . expression COMMA argument_list_call
+    (50) expression -> . factor
+    (51) expression -> . unary
+    (52) expression -> . binary
+    (33) factor -> . value
+    (34) factor -> . variable
+    (35) unary -> . NOT
+    (48) binary -> . logical
+    (49) binary -> . math
+    (27) value -> . integer
+    (28) value -> . float
+    (29) value -> . boolean
+    (30) value -> . string
+    (31) variable -> . id
+    (32) variable -> . function_call
+    (36) logical -> . factor LT factor
+    (37) logical -> . factor LE factor
+    (38) logical -> . factor GT factor
+    (39) logical -> . factor GE factor
+    (40) logical -> . factor EQUALS factor
+    (41) logical -> . factor NEQUALS factor
+    (42) logical -> . factor AND factor
+    (43) logical -> . factor OR factor
+    (44) math -> . factor PLUS factor
+    (45) math -> . factor MINUS factor
+    (46) math -> . factor TIMES factor
+    (47) math -> . factor DIVIDE factor
+    (24) integer -> . INTEGER_VALUE
+    (25) float -> . FLOAT_VALUE
+    (22) boolean -> . TRUE
+    (23) boolean -> . FALSE
+    (26) string -> . STRING_VALUE
+    (21) id -> . ID
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    NOT             shift and go to state 43
+    INTEGER_VALUE   shift and go to state 31
+    FLOAT_VALUE     shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    STRING_VALUE    shift and go to state 35
+    ID              shift and go to state 36
+
+    expression                     shift and go to state 56
+    argument_list_call             shift and go to state 95
+    factor                         shift and go to state 40
+    unary                          shift and go to state 41
+    binary                         shift and go to state 42
+    value                          shift and go to state 23
+    variable                       shift and go to state 24
+    logical                        shift and go to state 44
+    math                           shift and go to state 45
+    integer                        shift and go to state 25
+    float                          shift and go to state 26
+    boolean                        shift and go to state 27
+    string                         shift and go to state 28
+    id                             shift and go to state 29
+    function_call                  shift and go to state 30
+
+state 76
+
+    (16) if_statement -> IF logical COLON block .
+    (17) if_statement -> IF logical COLON block . NEWLINE ELSE COLON block
+    (13) block -> block . NEWLINE
+
+  ! shift/reduce conflict for NEWLINE resolved as shift
+    ID              reduce using rule 16 (if_statement -> IF logical COLON block .)
+    IF              reduce using rule 16 (if_statement -> IF logical COLON block .)
+    WHILE           reduce using rule 16 (if_statement -> IF logical COLON block .)
+    RETURN          reduce using rule 16 (if_statement -> IF logical COLON block .)
+    DEF             reduce using rule 16 (if_statement -> IF logical COLON block .)
+    $end            reduce using rule 16 (if_statement -> IF logical COLON block .)
+    DEDENT          reduce using rule 16 (if_statement -> IF logical COLON block .)
+    NEWLINE         shift and go to state 96
+
+  ! NEWLINE         [ reduce using rule 16 (if_statement -> IF logical COLON block .) ]
+
+
+state 77
+
+    (12) block -> INDENT . statement_list DEDENT
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement_list statement
+    (4) statement_list -> . statement_list NEWLINE
+    (5) statement -> . assignment
+    (6) statement -> . if_statement
+    (7) statement -> . while_statement
+    (8) statement -> . return_statement
+    (9) statement -> . function
+    (10) statement -> . function_call
+    (11) statement -> . statement NEWLINE
+    (14) assignment -> . ID ASSIGN expression
+    (15) assignment -> . ID COLON type ASSIGN expression
+    (16) if_statement -> . IF logical COLON block
+    (17) if_statement -> . IF logical COLON block NEWLINE ELSE COLON block
+    (18) while_statement -> . WHILE logical COLON block
+    (19) while_statement -> . WHILE TRUE COLON block
+    (20) return_statement -> . RETURN expression
+    (60) function -> . DEF ID LPAREN argument_list_definition RPAREN RETURN_TYPE type COLON block
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    ID              shift and go to state 10
+    IF              shift and go to state 11
+    WHILE           shift and go to state 12
+    RETURN          shift and go to state 13
+    DEF             shift and go to state 14
+
+    statement_list                 shift and go to state 97
+    statement                      shift and go to state 3
+    assignment                     shift and go to state 4
+    if_statement                   shift and go to state 5
+    while_statement                shift and go to state 6
+    return_statement               shift and go to state 7
+    function                       shift and go to state 8
+    function_call                  shift and go to state 9
+
+state 78
+
+    (36) logical -> factor LT factor .
+
+    COLON           reduce using rule 36 (logical -> factor LT factor .)
+    NEWLINE         reduce using rule 36 (logical -> factor LT factor .)
+    ID              reduce using rule 36 (logical -> factor LT factor .)
+    IF              reduce using rule 36 (logical -> factor LT factor .)
+    WHILE           reduce using rule 36 (logical -> factor LT factor .)
+    RETURN          reduce using rule 36 (logical -> factor LT factor .)
+    DEF             reduce using rule 36 (logical -> factor LT factor .)
+    $end            reduce using rule 36 (logical -> factor LT factor .)
+    DEDENT          reduce using rule 36 (logical -> factor LT factor .)
+    COMMA           reduce using rule 36 (logical -> factor LT factor .)
+    RPAREN          reduce using rule 36 (logical -> factor LT factor .)
+
+
+state 79
+
+    (37) logical -> factor LE factor .
+
+    COLON           reduce using rule 37 (logical -> factor LE factor .)
+    NEWLINE         reduce using rule 37 (logical -> factor LE factor .)
+    ID              reduce using rule 37 (logical -> factor LE factor .)
+    IF              reduce using rule 37 (logical -> factor LE factor .)
+    WHILE           reduce using rule 37 (logical -> factor LE factor .)
+    RETURN          reduce using rule 37 (logical -> factor LE factor .)
+    DEF             reduce using rule 37 (logical -> factor LE factor .)
+    $end            reduce using rule 37 (logical -> factor LE factor .)
+    DEDENT          reduce using rule 37 (logical -> factor LE factor .)
+    COMMA           reduce using rule 37 (logical -> factor LE factor .)
+    RPAREN          reduce using rule 37 (logical -> factor LE factor .)
+
+
+state 80
+
+    (38) logical -> factor GT factor .
+
+    COLON           reduce using rule 38 (logical -> factor GT factor .)
+    NEWLINE         reduce using rule 38 (logical -> factor GT factor .)
+    ID              reduce using rule 38 (logical -> factor GT factor .)
+    IF              reduce using rule 38 (logical -> factor GT factor .)
+    WHILE           reduce using rule 38 (logical -> factor GT factor .)
+    RETURN          reduce using rule 38 (logical -> factor GT factor .)
+    DEF             reduce using rule 38 (logical -> factor GT factor .)
+    $end            reduce using rule 38 (logical -> factor GT factor .)
+    DEDENT          reduce using rule 38 (logical -> factor GT factor .)
+    COMMA           reduce using rule 38 (logical -> factor GT factor .)
+    RPAREN          reduce using rule 38 (logical -> factor GT factor .)
+
+
+state 81
+
+    (39) logical -> factor GE factor .
+
+    COLON           reduce using rule 39 (logical -> factor GE factor .)
+    NEWLINE         reduce using rule 39 (logical -> factor GE factor .)
+    ID              reduce using rule 39 (logical -> factor GE factor .)
+    IF              reduce using rule 39 (logical -> factor GE factor .)
+    WHILE           reduce using rule 39 (logical -> factor GE factor .)
+    RETURN          reduce using rule 39 (logical -> factor GE factor .)
+    DEF             reduce using rule 39 (logical -> factor GE factor .)
+    $end            reduce using rule 39 (logical -> factor GE factor .)
+    DEDENT          reduce using rule 39 (logical -> factor GE factor .)
+    COMMA           reduce using rule 39 (logical -> factor GE factor .)
+    RPAREN          reduce using rule 39 (logical -> factor GE factor .)
+
+
+state 82
+
+    (40) logical -> factor EQUALS factor .
+
+    COLON           reduce using rule 40 (logical -> factor EQUALS factor .)
+    NEWLINE         reduce using rule 40 (logical -> factor EQUALS factor .)
+    ID              reduce using rule 40 (logical -> factor EQUALS factor .)
+    IF              reduce using rule 40 (logical -> factor EQUALS factor .)
+    WHILE           reduce using rule 40 (logical -> factor EQUALS factor .)
+    RETURN          reduce using rule 40 (logical -> factor EQUALS factor .)
+    DEF             reduce using rule 40 (logical -> factor EQUALS factor .)
+    $end            reduce using rule 40 (logical -> factor EQUALS factor .)
+    DEDENT          reduce using rule 40 (logical -> factor EQUALS factor .)
+    COMMA           reduce using rule 40 (logical -> factor EQUALS factor .)
+    RPAREN          reduce using rule 40 (logical -> factor EQUALS factor .)
+
+
+state 83
+
+    (41) logical -> factor NEQUALS factor .
+
+    COLON           reduce using rule 41 (logical -> factor NEQUALS factor .)
+    NEWLINE         reduce using rule 41 (logical -> factor NEQUALS factor .)
+    ID              reduce using rule 41 (logical -> factor NEQUALS factor .)
+    IF              reduce using rule 41 (logical -> factor NEQUALS factor .)
+    WHILE           reduce using rule 41 (logical -> factor NEQUALS factor .)
+    RETURN          reduce using rule 41 (logical -> factor NEQUALS factor .)
+    DEF             reduce using rule 41 (logical -> factor NEQUALS factor .)
+    $end            reduce using rule 41 (logical -> factor NEQUALS factor .)
+    DEDENT          reduce using rule 41 (logical -> factor NEQUALS factor .)
+    COMMA           reduce using rule 41 (logical -> factor NEQUALS factor .)
+    RPAREN          reduce using rule 41 (logical -> factor NEQUALS factor .)
+
+
+state 84
+
+    (42) logical -> factor AND factor .
+
+    COLON           reduce using rule 42 (logical -> factor AND factor .)
+    NEWLINE         reduce using rule 42 (logical -> factor AND factor .)
+    ID              reduce using rule 42 (logical -> factor AND factor .)
+    IF              reduce using rule 42 (logical -> factor AND factor .)
+    WHILE           reduce using rule 42 (logical -> factor AND factor .)
+    RETURN          reduce using rule 42 (logical -> factor AND factor .)
+    DEF             reduce using rule 42 (logical -> factor AND factor .)
+    $end            reduce using rule 42 (logical -> factor AND factor .)
+    DEDENT          reduce using rule 42 (logical -> factor AND factor .)
+    COMMA           reduce using rule 42 (logical -> factor AND factor .)
+    RPAREN          reduce using rule 42 (logical -> factor AND factor .)
+
+
+state 85
+
+    (43) logical -> factor OR factor .
+
+    COLON           reduce using rule 43 (logical -> factor OR factor .)
+    NEWLINE         reduce using rule 43 (logical -> factor OR factor .)
+    ID              reduce using rule 43 (logical -> factor OR factor .)
+    IF              reduce using rule 43 (logical -> factor OR factor .)
+    WHILE           reduce using rule 43 (logical -> factor OR factor .)
+    RETURN          reduce using rule 43 (logical -> factor OR factor .)
+    DEF             reduce using rule 43 (logical -> factor OR factor .)
+    $end            reduce using rule 43 (logical -> factor OR factor .)
+    DEDENT          reduce using rule 43 (logical -> factor OR factor .)
+    COMMA           reduce using rule 43 (logical -> factor OR factor .)
+    RPAREN          reduce using rule 43 (logical -> factor OR factor .)
+
+
+state 86
+
+    (18) while_statement -> WHILE logical COLON block .
+    (13) block -> block . NEWLINE
+
+  ! shift/reduce conflict for NEWLINE resolved as shift
+    ID              reduce using rule 18 (while_statement -> WHILE logical COLON block .)
+    IF              reduce using rule 18 (while_statement -> WHILE logical COLON block .)
+    WHILE           reduce using rule 18 (while_statement -> WHILE logical COLON block .)
+    RETURN          reduce using rule 18 (while_statement -> WHILE logical COLON block .)
+    DEF             reduce using rule 18 (while_statement -> WHILE logical COLON block .)
+    $end            reduce using rule 18 (while_statement -> WHILE logical COLON block .)
+    DEDENT          reduce using rule 18 (while_statement -> WHILE logical COLON block .)
+    NEWLINE         shift and go to state 98
+
+  ! NEWLINE         [ reduce using rule 18 (while_statement -> WHILE logical COLON block .) ]
+
+
+state 87
+
+    (19) while_statement -> WHILE TRUE COLON block .
+    (13) block -> block . NEWLINE
+
+  ! shift/reduce conflict for NEWLINE resolved as shift
+    ID              reduce using rule 19 (while_statement -> WHILE TRUE COLON block .)
+    IF              reduce using rule 19 (while_statement -> WHILE TRUE COLON block .)
+    WHILE           reduce using rule 19 (while_statement -> WHILE TRUE COLON block .)
+    RETURN          reduce using rule 19 (while_statement -> WHILE TRUE COLON block .)
+    DEF             reduce using rule 19 (while_statement -> WHILE TRUE COLON block .)
+    $end            reduce using rule 19 (while_statement -> WHILE TRUE COLON block .)
+    DEDENT          reduce using rule 19 (while_statement -> WHILE TRUE COLON block .)
+    NEWLINE         shift and go to state 98
+
+  ! NEWLINE         [ reduce using rule 19 (while_statement -> WHILE TRUE COLON block .) ]
+
+
+state 88
+
+    (44) math -> factor PLUS factor .
+
+    NEWLINE         reduce using rule 44 (math -> factor PLUS factor .)
+    ID              reduce using rule 44 (math -> factor PLUS factor .)
+    IF              reduce using rule 44 (math -> factor PLUS factor .)
+    WHILE           reduce using rule 44 (math -> factor PLUS factor .)
+    RETURN          reduce using rule 44 (math -> factor PLUS factor .)
+    DEF             reduce using rule 44 (math -> factor PLUS factor .)
+    $end            reduce using rule 44 (math -> factor PLUS factor .)
+    DEDENT          reduce using rule 44 (math -> factor PLUS factor .)
+    COMMA           reduce using rule 44 (math -> factor PLUS factor .)
+    RPAREN          reduce using rule 44 (math -> factor PLUS factor .)
+
+
+state 89
+
+    (45) math -> factor MINUS factor .
+
+    NEWLINE         reduce using rule 45 (math -> factor MINUS factor .)
+    ID              reduce using rule 45 (math -> factor MINUS factor .)
+    IF              reduce using rule 45 (math -> factor MINUS factor .)
+    WHILE           reduce using rule 45 (math -> factor MINUS factor .)
+    RETURN          reduce using rule 45 (math -> factor MINUS factor .)
+    DEF             reduce using rule 45 (math -> factor MINUS factor .)
+    $end            reduce using rule 45 (math -> factor MINUS factor .)
+    DEDENT          reduce using rule 45 (math -> factor MINUS factor .)
+    COMMA           reduce using rule 45 (math -> factor MINUS factor .)
+    RPAREN          reduce using rule 45 (math -> factor MINUS factor .)
+
+
+state 90
+
+    (46) math -> factor TIMES factor .
+
+    NEWLINE         reduce using rule 46 (math -> factor TIMES factor .)
+    ID              reduce using rule 46 (math -> factor TIMES factor .)
+    IF              reduce using rule 46 (math -> factor TIMES factor .)
+    WHILE           reduce using rule 46 (math -> factor TIMES factor .)
+    RETURN          reduce using rule 46 (math -> factor TIMES factor .)
+    DEF             reduce using rule 46 (math -> factor TIMES factor .)
+    $end            reduce using rule 46 (math -> factor TIMES factor .)
+    DEDENT          reduce using rule 46 (math -> factor TIMES factor .)
+    COMMA           reduce using rule 46 (math -> factor TIMES factor .)
+    RPAREN          reduce using rule 46 (math -> factor TIMES factor .)
+
+
+state 91
+
+    (47) math -> factor DIVIDE factor .
+
+    NEWLINE         reduce using rule 47 (math -> factor DIVIDE factor .)
+    ID              reduce using rule 47 (math -> factor DIVIDE factor .)
+    IF              reduce using rule 47 (math -> factor DIVIDE factor .)
+    WHILE           reduce using rule 47 (math -> factor DIVIDE factor .)
+    RETURN          reduce using rule 47 (math -> factor DIVIDE factor .)
+    DEF             reduce using rule 47 (math -> factor DIVIDE factor .)
+    $end            reduce using rule 47 (math -> factor DIVIDE factor .)
+    DEDENT          reduce using rule 47 (math -> factor DIVIDE factor .)
+    COMMA           reduce using rule 47 (math -> factor DIVIDE factor .)
+    RPAREN          reduce using rule 47 (math -> factor DIVIDE factor .)
+
+
+state 92
+
+    (58) argument_list_definition -> ID . COLON type
+    (59) argument_list_definition -> ID . COLON type COMMA argument_list_definition
+
+    COLON           shift and go to state 99
+
+
+state 93
+
+    (60) function -> DEF ID LPAREN argument_list_definition . RPAREN RETURN_TYPE type COLON block
+
+    RPAREN          shift and go to state 100
+
+
+state 94
+
+    (15) assignment -> ID COLON type ASSIGN expression .
+
+    NEWLINE         reduce using rule 15 (assignment -> ID COLON type ASSIGN expression .)
+    ID              reduce using rule 15 (assignment -> ID COLON type ASSIGN expression .)
+    IF              reduce using rule 15 (assignment -> ID COLON type ASSIGN expression .)
+    WHILE           reduce using rule 15 (assignment -> ID COLON type ASSIGN expression .)
+    RETURN          reduce using rule 15 (assignment -> ID COLON type ASSIGN expression .)
+    DEF             reduce using rule 15 (assignment -> ID COLON type ASSIGN expression .)
+    $end            reduce using rule 15 (assignment -> ID COLON type ASSIGN expression .)
+    DEDENT          reduce using rule 15 (assignment -> ID COLON type ASSIGN expression .)
+
+
+state 95
+
+    (64) argument_list_call -> expression COMMA argument_list_call .
+
+    RPAREN          reduce using rule 64 (argument_list_call -> expression COMMA argument_list_call .)
+
+
+state 96
+
+    (17) if_statement -> IF logical COLON block NEWLINE . ELSE COLON block
+    (13) block -> block NEWLINE .
+
+    ELSE            shift and go to state 101
+    NEWLINE         reduce using rule 13 (block -> block NEWLINE .)
+    ID              reduce using rule 13 (block -> block NEWLINE .)
+    IF              reduce using rule 13 (block -> block NEWLINE .)
+    WHILE           reduce using rule 13 (block -> block NEWLINE .)
+    RETURN          reduce using rule 13 (block -> block NEWLINE .)
+    DEF             reduce using rule 13 (block -> block NEWLINE .)
+    $end            reduce using rule 13 (block -> block NEWLINE .)
+    DEDENT          reduce using rule 13 (block -> block NEWLINE .)
+
+
+state 97
+
+    (12) block -> INDENT statement_list . DEDENT
+    (3) statement_list -> statement_list . statement
+    (4) statement_list -> statement_list . NEWLINE
+    (5) statement -> . assignment
+    (6) statement -> . if_statement
+    (7) statement -> . while_statement
+    (8) statement -> . return_statement
+    (9) statement -> . function
+    (10) statement -> . function_call
+    (11) statement -> . statement NEWLINE
+    (14) assignment -> . ID ASSIGN expression
+    (15) assignment -> . ID COLON type ASSIGN expression
+    (16) if_statement -> . IF logical COLON block
+    (17) if_statement -> . IF logical COLON block NEWLINE ELSE COLON block
+    (18) while_statement -> . WHILE logical COLON block
+    (19) while_statement -> . WHILE TRUE COLON block
+    (20) return_statement -> . RETURN expression
+    (60) function -> . DEF ID LPAREN argument_list_definition RPAREN RETURN_TYPE type COLON block
+    (61) function_call -> . ID LPAREN RPAREN
+    (62) function_call -> . ID LPAREN argument_list_call RPAREN
+
+    DEDENT          shift and go to state 102
+    NEWLINE         shift and go to state 16
+    ID              shift and go to state 10
+    IF              shift and go to state 11
+    WHILE           shift and go to state 12
+    RETURN          shift and go to state 13
+    DEF             shift and go to state 14
+
+    statement                      shift and go to state 15
+    assignment                     shift and go to state 4
+    if_statement                   shift and go to state 5
+    while_statement                shift and go to state 6
+    return_statement               shift and go to state 7
+    function                       shift and go to state 8
+    function_call                  shift and go to state 9
+
+state 98
+
+    (13) block -> block NEWLINE .
+
+    NEWLINE         reduce using rule 13 (block -> block NEWLINE .)
+    ID              reduce using rule 13 (block -> block NEWLINE .)
+    IF              reduce using rule 13 (block -> block NEWLINE .)
+    WHILE           reduce using rule 13 (block -> block NEWLINE .)
+    RETURN          reduce using rule 13 (block -> block NEWLINE .)
+    DEF             reduce using rule 13 (block -> block NEWLINE .)
+    $end            reduce using rule 13 (block -> block NEWLINE .)
+    DEDENT          reduce using rule 13 (block -> block NEWLINE .)
+
+
+state 99
+
+    (58) argument_list_definition -> ID COLON . type
+    (59) argument_list_definition -> ID COLON . type COMMA argument_list_definition
+    (53) type -> . INT
+    (54) type -> . FLOAT
+    (55) type -> . STR
+    (56) type -> . BOOL
+    (57) type -> . VOID
+
+    INT             shift and go to state 49
+    FLOAT           shift and go to state 50
+    STR             shift and go to state 51
+    BOOL            shift and go to state 52
+    VOID            shift and go to state 53
+
+    type                           shift and go to state 103
+
+state 100
+
+    (60) function -> DEF ID LPAREN argument_list_definition RPAREN . RETURN_TYPE type COLON block
+
+    RETURN_TYPE     shift and go to state 104
+
+
+state 101
+
+    (17) if_statement -> IF logical COLON block NEWLINE ELSE . COLON block
+
+    COLON           shift and go to state 105
+
+
+state 102
+
+    (12) block -> INDENT statement_list DEDENT .
+
+    NEWLINE         reduce using rule 12 (block -> INDENT statement_list DEDENT .)
+    ID              reduce using rule 12 (block -> INDENT statement_list DEDENT .)
+    IF              reduce using rule 12 (block -> INDENT statement_list DEDENT .)
+    WHILE           reduce using rule 12 (block -> INDENT statement_list DEDENT .)
+    RETURN          reduce using rule 12 (block -> INDENT statement_list DEDENT .)
+    DEF             reduce using rule 12 (block -> INDENT statement_list DEDENT .)
+    $end            reduce using rule 12 (block -> INDENT statement_list DEDENT .)
+    DEDENT          reduce using rule 12 (block -> INDENT statement_list DEDENT .)
+
+
+state 103
+
+    (58) argument_list_definition -> ID COLON type .
+    (59) argument_list_definition -> ID COLON type . COMMA argument_list_definition
+
+    RPAREN          reduce using rule 58 (argument_list_definition -> ID COLON type .)
+    COMMA           shift and go to state 106
+
+
+state 104
+
+    (60) function -> DEF ID LPAREN argument_list_definition RPAREN RETURN_TYPE . type COLON block
+    (53) type -> . INT
+    (54) type -> . FLOAT
+    (55) type -> . STR
+    (56) type -> . BOOL
+    (57) type -> . VOID
+
+    INT             shift and go to state 49
+    FLOAT           shift and go to state 50
+    STR             shift and go to state 51
+    BOOL            shift and go to state 52
+    VOID            shift and go to state 53
+
+    type                           shift and go to state 107
+
+state 105
+
+    (17) if_statement -> IF logical COLON block NEWLINE ELSE COLON . block
+    (12) block -> . INDENT statement_list DEDENT
+    (13) block -> . block NEWLINE
+
+    INDENT          shift and go to state 77
+
+    block                          shift and go to state 108
+
+state 106
+
+    (59) argument_list_definition -> ID COLON type COMMA . argument_list_definition
+    (58) argument_list_definition -> . ID COLON type
+    (59) argument_list_definition -> . ID COLON type COMMA argument_list_definition
+
+    ID              shift and go to state 92
+
+    argument_list_definition       shift and go to state 109
+
+state 107
+
+    (60) function -> DEF ID LPAREN argument_list_definition RPAREN RETURN_TYPE type . COLON block
+
+    COLON           shift and go to state 110
+
+
+state 108
+
+    (17) if_statement -> IF logical COLON block NEWLINE ELSE COLON block .
+    (13) block -> block . NEWLINE
+
+  ! shift/reduce conflict for NEWLINE resolved as shift
+    ID              reduce using rule 17 (if_statement -> IF logical COLON block NEWLINE ELSE COLON block .)
+    IF              reduce using rule 17 (if_statement -> IF logical COLON block NEWLINE ELSE COLON block .)
+    WHILE           reduce using rule 17 (if_statement -> IF logical COLON block NEWLINE ELSE COLON block .)
+    RETURN          reduce using rule 17 (if_statement -> IF logical COLON block NEWLINE ELSE COLON block .)
+    DEF             reduce using rule 17 (if_statement -> IF logical COLON block NEWLINE ELSE COLON block .)
+    $end            reduce using rule 17 (if_statement -> IF logical COLON block NEWLINE ELSE COLON block .)
+    DEDENT          reduce using rule 17 (if_statement -> IF logical COLON block NEWLINE ELSE COLON block .)
+    NEWLINE         shift and go to state 98
+
+  ! NEWLINE         [ reduce using rule 17 (if_statement -> IF logical COLON block NEWLINE ELSE COLON block .) ]
+
+
+state 109
+
+    (59) argument_list_definition -> ID COLON type COMMA argument_list_definition .
+
+    RPAREN          reduce using rule 59 (argument_list_definition -> ID COLON type COMMA argument_list_definition .)
+
+
+state 110
+
+    (60) function -> DEF ID LPAREN argument_list_definition RPAREN RETURN_TYPE type COLON . block
+    (12) block -> . INDENT statement_list DEDENT
+    (13) block -> . block NEWLINE
+
+    INDENT          shift and go to state 77
+
+    block                          shift and go to state 111
+
+state 111
+
+    (60) function -> DEF ID LPAREN argument_list_definition RPAREN RETURN_TYPE type COLON block .
+    (13) block -> block . NEWLINE
+
+  ! shift/reduce conflict for NEWLINE resolved as shift
+    ID              reduce using rule 60 (function -> DEF ID LPAREN argument_list_definition RPAREN RETURN_TYPE type COLON block .)
+    IF              reduce using rule 60 (function -> DEF ID LPAREN argument_list_definition RPAREN RETURN_TYPE type COLON block .)
+    WHILE           reduce using rule 60 (function -> DEF ID LPAREN argument_list_definition RPAREN RETURN_TYPE type COLON block .)
+    RETURN          reduce using rule 60 (function -> DEF ID LPAREN argument_list_definition RPAREN RETURN_TYPE type COLON block .)
+    DEF             reduce using rule 60 (function -> DEF ID LPAREN argument_list_definition RPAREN RETURN_TYPE type COLON block .)
+    $end            reduce using rule 60 (function -> DEF ID LPAREN argument_list_definition RPAREN RETURN_TYPE type COLON block .)
+    DEDENT          reduce using rule 60 (function -> DEF ID LPAREN argument_list_definition RPAREN RETURN_TYPE type COLON block .)
+    NEWLINE         shift and go to state 98
+
+  ! NEWLINE         [ reduce using rule 60 (function -> DEF ID LPAREN argument_list_definition RPAREN RETURN_TYPE type COLON block .) ]
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for NEWLINE in state 3 resolved as shift
+WARNING: shift/reduce conflict for NEWLINE in state 15 resolved as shift
+WARNING: shift/reduce conflict for NEWLINE in state 76 resolved as shift
+WARNING: shift/reduce conflict for NEWLINE in state 86 resolved as shift
+WARNING: shift/reduce conflict for NEWLINE in state 87 resolved as shift
+WARNING: shift/reduce conflict for NEWLINE in state 108 resolved as shift
+WARNING: shift/reduce conflict for NEWLINE in state 111 resolved as shift

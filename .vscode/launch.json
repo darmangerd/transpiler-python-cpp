@@ -1,0 +1,40 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [{
+            "name": "lexer",
+            "type": "python",
+            "request": "launch",
+            "program": "lexer.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "sources/main.py"
+            ]
+        },
+        {
+            "name": "parser",
+            "type": "python",
+            "request": "launch",
+            "program": "yacc.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "sources/main.py"
+            ]
+        },
+        {
+            "name": "transpiler",
+            "type": "python",
+            "request": "launch",
+            "program": "transpiler.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "sources/main.py"
+            ]
+        }
+    ]
+}
